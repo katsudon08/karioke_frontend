@@ -1,15 +1,27 @@
+import Link from "next/link";
+
 const page = () => {
     const hairetsu = [...Array(100)].map((v, i) => i)
+
     return (
-        <div className=" bg-red-100 h-screen w-screen pt-20 px-8 pb-6 ">
-            <div className=" bg-blue-100 h-full flex flex-col overflow-y-scroll text-center break-all py-2 px-6 ">
+        <>
+            <div className=" bg-blue-100 h-full flex flex-col overflow-y-scroll text-center break-all py-4 px-6 ">
                 {hairetsu.map((i) => (
-                    <div className=" bg-red-200 grow my-2 py-6 rounded-md ">
+                    <Link href="/edit" className=" bg-red-200 border-l-8 border-blue-400 grow my-4 py-6 rounded-md " >
                         {i}
-                    </div>
+                    </Link>
                 ))}
             </div>
-        </div>
+            <div className=" fixed bottom-4 right-4 ">
+                <Link href="/create" >
+                    <div className=" rounded-full bg-green-400 h-14 w-14 bold text-center align-middle ">
+                        <div className=" font-bold text-5xl text-white ">
+                            +
+                        </div>
+                    </div>
+                </Link>
+            </div>
+        </>
     );
 }
 
