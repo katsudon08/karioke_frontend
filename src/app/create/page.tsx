@@ -1,14 +1,17 @@
 "use client"
 
+import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 
 const page = () => {
     const [colorFlags, setColorFlags] = useState([false, false, false, false, false])
+    const router = useRouter()
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
 
         console.log("submit")
+        router.replace("/")
     }
 
     const handleColorChange = (num: number) => {
@@ -43,8 +46,8 @@ const page = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="rank" className=" w-full flex justify-start ">ランク</label>
-                        <div id="rank">
+                        <p className=" w-full flex justify-start ">ランク</p>
+                        <div>
                             <span className=" flex justify-center ">
                                 <input key={0} id="review01" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(0)} /><label htmlFor="review01" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[0]}>★</label>
                                 <input key={1} id="review02" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(1)} /><label htmlFor="review02" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[1]}>★</label>
@@ -71,7 +74,9 @@ const page = () => {
                         </textarea>
                     </div>
                     <div className=" flex flex-col h-full justify-end ">
-                        <button className=" w-full px-4 py-2 mt-auto text-white bg-blue-500 rounded-lg hover:bg-blue-400 hover:scale-95 duration-200 ">追加</button>
+                        <button className=" w-full px-4 py-2 mt-auto text-white bg-blue-500 rounded-lg hover:bg-blue-400 hover:scale-95 duration-200 ">
+                            追加
+                        </button>
                     </div>
                 </form>
             </div>
