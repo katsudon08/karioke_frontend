@@ -5,9 +5,9 @@ const page = () => {
 
     return (
         <>
-            <div className=" bg-blue-100 h-full flex flex-col overflow-y-scroll text-center break-all py-4 px-6 shadow-xl ">
+            <div className=" bg-blue-100 h-full flex flex-col overflow-y-scroll hidden-scrollbar text-center break-all py-4 px-6 shadow-xl ">
                 {hairetsu.map((i) => (
-                    <Link href="/edit" className=" bg-red-200 border-l-8 border-blue-400 grow my-4 py-6 rounded-md " >
+                    <Link key={i} href="/edit" className=" bg-red-200 border-l-8 border-blue-400 grow my-4 py-6 rounded-md " >
                         {i}
                     </Link>
                 ))}
