@@ -15,7 +15,7 @@ const page = () => {
             <div className=" h-full w-full flex justify-center ">
                 <main aria-label="曲情報一覧ページ" className=" bg-blue-100 w-full h-full py-6 px-4 max-w-3xl shadow-xl flex flex-col overflow-y-scroll hidden-scrollbar text-center space-y-3 break-all ">
                     {hairetsu.map((i) => (
-                        <Link key={i} href="/edit" className=" bg-red-200 shadow-md border-l-8 border-blue-400 grow py-6 rounded-md hover:border-blue-300 " >
+                        <Link key={i} href="/detail" className=" bg-red-200 shadow-md border-l-8 border-blue-400 grow py-6 rounded-md hover:border-blue-300 " >
                             {i}
                         </Link>
                     ))}

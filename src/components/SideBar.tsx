@@ -14,8 +14,8 @@ const SideBar = ({ anchorEl, handleInVisible }: { anchorEl: Visibility, handleIn
         <div className=" duration-400 ">
             <main aria-label="サイドバー" className={" bg-white fixed overflow-y-scroll hidden-scrollbar top-0 left-0 h-screen w-5/12 z-10 shadow-2xl transition-transform " + anchorEl}  >
                 <div className=" max-h-fit w-full flex justify-end py-2 pr-2 shadow-sm ">
-                    <div className=" bg-gray-200 py-1 px-2 rounded-md cursor-pointer hover:bg-gray-300 " onClick={handleInVisible} aria-label="閉じるボタン">
-                        閉じる
+                    <div aria-label="閉じるボタン" className=" bg-white shadow-md py-1 px-3 text-2xl rounded-md cursor-pointer hover:bg-red-500 hover:text-white " onClick={handleInVisible}>
+                        ×
                     </div>
                 </div>
                 <div aria-label="フォルダの作成ボタン" className=" w-full py-2 pl-4 shadow-sm cursor-pointer hover:bg-gray-50 " onClick={handlePrompt}>

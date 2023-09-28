@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 
@@ -12,6 +13,11 @@ const page = () => {
 
         console.log("submit")
         router.replace("/", { scroll: false })
+    }
+
+    const handleConfirm = () => {
+        const flag = confirm("このデータを削除しますか？")
+        console.log(flag)
     }
 
     const handleColorChange = (num: number) => {
@@ -74,9 +80,14 @@ const page = () => {
                         </textarea>
                     </div>
                     <div className=" flex flex-col h-full justify-end ">
-                        <button className=" w-full px-4 py-2 mt-auto text-white bg-blue-500 rounded-lg hover:bg-blue-400 hover:scale-95 duration-200 ">
-                            確定
-                        </button>
+                        <div className=" w-full flex justify-between ">
+                            <button className=" w-full px-4 py-2 mr-1 text-white bg-red-500 rounded-lg hover:bg-red-400 hover:scale-95 duration-200 " onClick={handleConfirm}>
+                                削除
+                            </button>
+                            <Link aria-label="編集ボタン" href="/edit" className=" w-full px-4 py-2 ml-1  text-white bg-green-500 rounded-lg hover:bg-green-400 hover:scale-95 duration-200 ">
+                                編集
+                            </Link>
+                        </div>
                     </div>
                 </form>
             </main>
