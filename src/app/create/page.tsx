@@ -1,17 +1,17 @@
 "use client"
 
-import { useRouter } from "next/router";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 const page = () => {
-    const [colorFlags, setColorFlags] = useState([false, false, false, false, false])
+    const [colorFlags, setColorFlags] = useState([...Array(5).fill(false)])
     const router = useRouter()
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
 
         console.log("submit")
-        router.replace("/")
+        router.replace("/", { scroll: false })
     }
 
     const handleColorChange = (num: number) => {
@@ -27,7 +27,7 @@ const page = () => {
 
     return (
         <div className=" bg-blue-100 h-full flex flex-col items-center text-center break-all py-6 px-6 ">
-            <div className=" bg-green-200 h-full w-full max-w-lg shadow-lg rounded-lg overflow-y-scroll hidden-scrollbar ">
+            <main aria-label="曲情報作成ページ" className=" bg-green-200 h-full w-full max-w-lg shadow-lg rounded-lg overflow-y-scroll hidden-scrollbar ">
                 <form className=" flex flex-col h-full py-4 space-y-4 px-4 " onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="title" className=" w-full flex justify-start ">タイトル</label>
@@ -79,7 +79,7 @@ const page = () => {
                         </button>
                     </div>
                 </form>
-            </div>
+            </main>
         </div>
     );
 }
