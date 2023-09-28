@@ -1,7 +1,14 @@
 import { Visibility } from "@/types";
 
 const SideBar = ({ anchorEl, handleInVisible }: { anchorEl: Visibility, handleInVisible: () => void }) => {
-    const hairetsu = [...Array(100)].map((v, i) => i)
+    // const hairetsu = [...Array(100)].map((v, i) => i)
+    const hairetsu: string[] = []
+
+    const handlePrompt = () => {
+        const foldername = prompt("新しく作成するフォルダの名前を入力してください")
+        if (foldername) hairetsu.push(foldername)
+        console.log(foldername)
+    }
 
     return (
         <div className=" duration-400 ">
@@ -11,7 +18,7 @@ const SideBar = ({ anchorEl, handleInVisible }: { anchorEl: Visibility, handleIn
                         閉じる
                     </div>
                 </div>
-                <div aria-label="フォルダの作成ボタン" className=" w-full py-2 pl-4 shadow-sm cursor-pointer hover:bg-gray-50 ">
+                <div aria-label="フォルダの作成ボタン" className=" w-full py-2 pl-4 shadow-sm cursor-pointer hover:bg-gray-50 " onClick={handlePrompt}>
                     フォルダの作成
                 </div>
                 <div className=" py-2 ">
