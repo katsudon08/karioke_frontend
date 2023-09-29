@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 const Page = () => {
-    const hairetsu = [...Array(100)].map((v, i) => i)
+    const hairetsu = [...Array(100)].map((i) => i)
 
     const handleConfirm = () => {
         const flag = confirm("このフォルダを削除しますか？")
@@ -13,10 +13,15 @@ const Page = () => {
     return (
         <>
             <div className=" h-full w-full flex justify-center ">
-                <main aria-label="曲情報一覧ページ" className=" bg-white w-full h-full py-6 px-4 max-w-3xl shadow-xl flex flex-col overflow-y-scroll hidden-scrollbar space-y-3 break-all ">
+                <main aria-label="曲情報一覧ページ" className=" bg-white w-full h-full py-6 px-4 max-w-3xl shadow-xl flex flex-col overflow-y-scroll hidden-scrollbar space-y-3 ">
                     {hairetsu.map((i) => (
-                        <Link key={i} href="/detail" className=" bg-white shadow-md border-l-8 border-blue-400 grow py-6 px-4 rounded-md hover:border-blue-300 " >
-                            {i}
+                        <Link key={i} href="/detail" className=" bg-white shadow-md border-l-8 border-blue-400 grow py-6 space-y-2 px-4 rounded-md hover:border-blue-300 " >
+                            <div className=" w-full flex flex-col space-y-1 ">
+                                <span className=" whitespace-nowrap overflow-hidden text-ellipsis ">曲名: {"曲名" + i}</span>
+                                <span className=" whitespace-nowrap overflow-hidden text-ellipsis " >ランク: {"ランク" + i}</span>
+                                <span className=" whitespace-nowrap overflow-hidden text-ellipsis ">日付: {"日付" + i}</span>
+                            </div>
+                            <div className=" w-full text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis ">{i + "の説明文"}</div>
                         </Link>
                     ))}
                 </main>
