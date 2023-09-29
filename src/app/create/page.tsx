@@ -68,12 +68,12 @@ const Page = () => {
                     <div>
                         <label htmlFor="memo" className=" w-full flex justify-start ">メモ</label>
                         <textarea
-                            className=" shadow-sm border-2 w-full max-h-16 hidden-scrollbar px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
+                            className=" shadow-sm border-2 w-full max-h-12 hidden-scrollbar px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                             id="memo"
                         >
                         </textarea>
                     </div>
-                    <div className=" flex flex-col h-full justify-end pb-4 ">
+                    <div className=" flex flex-col h-full justify-end ">
                         <button className=" w-full px-4 py-2 mt-auto text-white bg-blue-500 rounded-lg hover:bg-blue-400 hover:scale-95 duration-200 ">
                             追加
                         </button>
