@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 const Page = () => {
-    const hairetsu = [...Array(100)].map((i) => i)
+    const hairetsu = [...Array(100)].map((v, i) => i)
 
     const handleConfirm = () => {
         const flag = confirm("このフォルダを削除しますか？")
