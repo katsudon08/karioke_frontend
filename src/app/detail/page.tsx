@@ -5,7 +5,7 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 const page = () => {
-    const [colorFlags, setColorFlags] = useState([...Array(5).fill(false)])
+    const [colorFlags, setColorFlags] = useState([true, true, true, false, false])
     const router = useRouter()
 
     const handleSubmit = (e: FormEvent) => {
@@ -32,52 +32,60 @@ const page = () => {
     ))
 
     return (
-        <div className=" bg-blue-100 h-full flex flex-col items-center text-center break-all py-6 px-6 ">
+        <div className=" h-full flex flex-col items-center text-center break-all py-6 px-6 ">
             <main aria-label="曲情報作成ページ" className=" bg-white h-full w-full max-w-lg shadow-lg rounded-lg overflow-y-scroll hidden-scrollbar ">
                 <form className=" flex flex-col h-full py-4 space-y-4 px-4 " onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="title" className=" w-full flex justify-start ">タイトル</label>
-                        <input
-                            type="text"
+                        <div
+                            aria-label="タイトル名"
                             className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                             id="title"
-                        />
+                        >
+                            タイトル名
+                        </div>
                     </div>
                     <div>
                         <label htmlFor="singer" className=" w-full flex justify-start ">歌手</label>
-                        <input
-                            type="text"
+                        <div
+                            aria-label="歌手名"
                             className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                             id="singer"
-                        />
+                        >
+                            歌手名
+                        </div>
                     </div>
                     <div>
                         <p className=" w-full flex justify-start ">ランク</p>
-                        <div>
+                        <div aria-label="曲の評価">
                             <span className=" flex justify-center ">
-                                <input key={0} id="review01" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(0)} /><label htmlFor="review01" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[0]}>★</label>
-                                <input key={1} id="review02" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(1)} /><label htmlFor="review02" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[1]}>★</label>
-                                <input key={2} id="review03" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(2)} /><label htmlFor="review03" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[2]}>★</label>
-                                <input key={3} id="review04" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(3)} /><label htmlFor="review04" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[3]}>★</label>
-                                <input key={4} id="review05" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(4)} /><label htmlFor="review05" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[4]}>★</label>
+                                <label htmlFor="review01" className={" text-3xl px-2 " + colors[0]}>★</label>
+                                <label htmlFor="review02" className={" text-3xl px-2 " + colors[1]}>★</label>
+                                <label htmlFor="review03" className={" text-3xl px-2 " + colors[2]}>★</label>
+                                <label htmlFor="review04" className={" text-3xl px-2 " + colors[3]}>★</label>
+                                <label htmlFor="review05" className={" text-3xl px-2 " + colors[4]}>★</label>
                             </span>
                         </div>
                     </div>
                     <div>
                         <label htmlFor="key" className=" w-full flex justify-start ">キー</label>
                         <input
+                            aria-label="キーのプラスマイナス"
+                            value={50}
                             type="range"
-                            className=" w-full  py-2 rounded-lg focus:outline-none focus:border-blue-400 "
+                            className=" w-full  py-2 rounded-lg  disabled:bg-blue-400 disabled:text-blue-400 disabled:border-blue-400 "
                             id="key"
                         />
                     </div>
                     <div>
                         <label htmlFor="memo" className=" w-full flex justify-start ">メモ</label>
-                        <textarea
-                            className=" shadow-sm border-2 w-full max-h-20 hidden-scrollbar px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
+                        <div
+                            aria-label="メモ欄"
+                            className=" shadow-sm border-2 w-full max-h-16 hidden-scrollbar px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                             id="memo"
                         >
-                        </textarea>
+                            メモ
+                        </div>
                     </div>
                     <div className=" flex flex-col h-full justify-end ">
                         <div className=" w-full flex justify-between ">

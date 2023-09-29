@@ -26,14 +26,14 @@ const page = () => {
     ))
 
     return (
-        <div className=" bg-blue-100 h-full flex flex-col items-center text-center break-all py-6 px-6 ">
-            <main aria-label="曲情報作成ページ" className=" bg-green-200 h-full w-full max-w-lg shadow-lg rounded-lg overflow-y-scroll hidden-scrollbar ">
+        <div className=" h-full flex flex-col items-center text-center break-all py-6 px-6 ">
+            <main aria-label="曲情報作成ページ" className=" bg-white h-full w-full max-w-lg shadow-lg rounded-lg overflow-y-scroll hidden-scrollbar ">
                 <form className=" flex flex-col h-full py-4 space-y-4 px-4 " onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="title" className=" w-full flex justify-start ">タイトル</label>
                         <input
                             type="text"
-                            className=" w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
+                            className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                             id="title"
                         />
                     </div>
@@ -41,7 +41,7 @@ const page = () => {
                         <label htmlFor="singer" className=" w-full flex justify-start ">歌手</label>
                         <input
                             type="text"
-                            className=" w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
+                            className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                             id="singer"
                         />
                     </div>
@@ -68,7 +68,7 @@ const page = () => {
                     <div>
                         <label htmlFor="memo" className=" w-full flex justify-start ">メモ</label>
                         <textarea
-                            className=" w-full max-h-20 hidden-scrollbar px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
+                            className=" shadow-sm border-2 w-full max-h-16 hidden-scrollbar px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                             id="memo"
                         >
                         </textarea>
