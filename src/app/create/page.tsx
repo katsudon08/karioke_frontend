@@ -26,7 +26,7 @@ const Page = () => {
     ))
 
     return (
-        <div className=" h-full flex flex-col items-center text-center break-all py-6 px-6 ">
+        <div className=" h-full flex flex-col justify-center items-center text-center break-all py-6 px-6 ">
             <main aria-label="曲情報作成ページ" className=" bg-white h-fit w-full max-w-lg shadow-lg rounded-lg overflow-y-scroll hidden-scrollbar ">
                 <form className=" flex flex-col h-full py-4 space-y-4 px-4 " onSubmit={handleSubmit}>
                     <div>
@@ -76,9 +76,6 @@ const Page = () => {
                     <button className=" w-full px-4 py-2  text-white bg-blue-500 rounded-lg hover:bg-blue-400 hover:scale-95 duration-200 ">
                         追加
                     </button>
-                    {/* <div className=" flex flex-col h-full justify-end ">
-
-                    </div> */}
                 </form>
             </main>
         </div>
