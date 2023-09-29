@@ -1,10 +1,10 @@
 "use client"
 
 import Link from "next/link";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
-const page = () => {
+const Page = () => {
     const [colorFlags, setColorFlags] = useState([true, true, true, false, false])
     const router = useRouter()
 
@@ -103,4 +103,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default Page;

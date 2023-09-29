@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-const page = () => {
+const Page = () => {
     const hairetsu = [...Array(100)].map((v, i) => i)
 
     const handleConfirm = () => {
@@ -45,4 +45,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default Page;

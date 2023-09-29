@@ -1,9 +1,9 @@
 "use client"
 
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
-const page = () => {
+const Page = () => {
     const [colorFlags, setColorFlags] = useState([...Array(5).fill(false)])
     const router = useRouter()
 
@@ -84,4 +84,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default Page;
