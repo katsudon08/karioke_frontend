@@ -31,12 +31,12 @@ const Page = () => {
                 </div>
             </div>
             <div className=" fixed bottom-4 right-4 ">
-                <Link aria-label="曲情報追加ボタン" href="/create" className=" opacity-100 ">
+                <Link aria-label="曲情報追加ボタン" href="/create" >
                     <div className=" rounded-full bg-blue-400 h-14 w-14 bold text-center hover:bg-blue-300 duration-200 ">
-                        <div className=" h-full w-full flex justify-center bg-opacity-100 ">
-                            <div className=" text-5xl text-white bg-opacity-100 ">
+                        <div className=" h-full w-full flex justify-center ">
+                            <span className=" text-5xl text-white ">
                                 +
-                            </div>
+                            </span>
                         </div>
                     </div>
                 </Link>
