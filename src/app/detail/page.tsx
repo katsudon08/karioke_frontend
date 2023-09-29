@@ -33,7 +33,7 @@ const Page = () => {
 
     return (
         <div className=" h-full flex flex-col items-center text-center break-all py-6 px-6 ">
-            <main aria-label="曲情報作成ページ" className=" bg-white h-full w-full max-w-lg shadow-lg rounded-lg overflow-y-scroll hidden-scrollbar ">
+            <main aria-label="曲情報作成ページ" className=" bg-white max-h-screen h-full w-full max-w-lg shadow-lg rounded-lg overflow-y-scroll hidden-scrollbar ">
                 <form className=" flex flex-col h-full py-4 space-y-4 px-4 " onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="title" className=" w-full flex justify-start ">タイトル</label>
