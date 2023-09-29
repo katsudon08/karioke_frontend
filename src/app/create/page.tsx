@@ -73,7 +73,8 @@ const Page = () => {
                         >
                         </textarea>
                     </div>
-                    <div className=" flex flex-col h-full justify-end ">
+                    <div className=" flex flex-col h-full justify-between ">
+                        <div className="grow"/>
                         <button className=" w-full px-4 py-2 mt-auto text-white bg-blue-500 rounded-lg hover:bg-blue-400 hover:scale-95 duration-200 ">
                             追加
                         </button>
