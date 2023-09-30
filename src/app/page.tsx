@@ -17,15 +17,15 @@ const Page = () => {
                     {hairetsu.map((i) => (
                         <Link key={i} href="/detail" className=" bg-white shadow-md border-l-8 border-blue-400 grow py-6 space-y-2 px-4 rounded-md hover:border-blue-300 " >
                             <div className=" w-full flex flex-col space-y-1 ">
-                                <span className=" whitespace-nowrap overflow-hidden text-ellipsis ">曲名: {"曲名" + i}</span>
+                                <span className=" whitespace-nowrap overflow-hidden text-ellipsis ">タイトル: {"タイトル" + i}</span>
+                                <span className=" whitespace-nowrap overflow-hidden text-ellipsis ">歌手: {"歌手" + i}</span>
                                 <span className=" whitespace-nowrap overflow-hidden text-ellipsis " >ランク: {"ランク" + i}</span>
-                                <span className=" whitespace-nowrap overflow-hidden text-ellipsis ">日付: {"日付" + i}</span>
                             </div>
-                            <div className=" w-full text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis ">{i + "の説明文"}</div>
+                            <div className=" w-full text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis ">{i + "のメモ"}</div>
                         </Link>
                     ))}
                 </main>
-            </div>
+            </div>  
             <div className=" fixed bottom-4 left-4 ">
                 <div aria-label="フォルダ削除ボタン" className=" rounded-full bg-red-500 h-14 w-14 flex flex-col justify-center hover:bg-red-400 duration-200 " onClick={handleConfirm}>
                     <div className=" w-full flex justify-center ">

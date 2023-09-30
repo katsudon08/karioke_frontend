@@ -1,25 +1,20 @@
 "use client"
 
 import { useState } from 'react'
-import { Visibility } from '@/types'
 import Header from '@/components/Header'
 import SideBar from '@/components/SideBar'
 
 const Home = () => {
-    const [anchorEl, setAnchorEl] = useState<Visibility>("invisible")
+    const [anchorEl, setAnchorEl] = useState<boolean>(false)
 
-    const handleVisible = () => {
-        setAnchorEl("visible")
-    }
-
-    const handleInVisible = () => {
-        setAnchorEl("invisible")
+    const handleToggleVisible = () => {
+        setAnchorEl(!anchorEl)
     }
 
     return (
         <div className=' h-full w-full '>
-            <SideBar anchorEl={anchorEl} handleInVisible={handleInVisible} />
-            <Header handleVisible={handleVisible} />
+            <SideBar anchorEl={anchorEl} handleToggleVisible={handleToggleVisible} />
+            <Header handleToggleVisible={handleToggleVisible} />
         </div>
     );
 }

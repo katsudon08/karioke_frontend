@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-const Header = ({ handleVisible }: { handleVisible: () => void }) => {
+const Header = ({ handleToggleVisible }: { handleToggleVisible: () => void }) => {
     const pathname = usePathname()
     const title = (pathname === "/") ? "HOME" : pathname.slice(1, pathname.length).toUpperCase()
 
@@ -10,7 +10,7 @@ const Header = ({ handleVisible }: { handleVisible: () => void }) => {
         <header className=" min-w-full h-14 top-0 left-0 py-2 px-6 fixed z-0 bg-white bg-opacity-80 ">
             <div className=" min-w-full min-h-full flex justify-center items-center ">
                 <div className=" min-w-full flex justify-start ">
-                    <div aria-label="メニューボタン" className=" bg-white shadow-md py-1 px-2 flex flex-col justify-center rounded-md cursor-pointer hover:bg-gray-300 duration-300 " onClick={handleVisible}>
+                    <div aria-label="メニューボタン" className=" bg-white shadow-md py-1 px-2 flex flex-col justify-center rounded-md cursor-pointer hover:bg-gray-300 duration-300 " onClick={handleToggleVisible}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 50 50">
                             <path d="M 5 8 A 2.0002 2.0002 0 1 0 5 12 L 45 12 A 2.0002 2.0002 0 1 0 45 8 L 5 8 z M 5 23 A 2.0002 2.0002 0 1 0 5 27 L 45 27 A 2.0002 2.0002 0 1 0 45 23 L 5 23 z M 5 38 A 2.0002 2.0002 0 1 0 5 42 L 45 42 A 2.0002 2.0002 0 1 0 45 38 L 5 38 z"></path>
                         </svg>
