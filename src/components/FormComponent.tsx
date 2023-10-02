@@ -36,11 +36,11 @@ const FormComponent = ({ buttonLabel }: { buttonLabel: string }) => {
                 />
             </div>
             <div>
-                <label htmlFor="singer" className=" w-full flex justify-start ">歌手</label>
+                <label htmlFor="artist" className=" w-full flex justify-start ">アーティスト</label>
                 <input
                     type="text"
                     className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
-                    id="singer"
+                    id="artist"
                 />
             </div>
             <div>

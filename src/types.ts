@@ -1,6 +1,6 @@
 export interface Song {
     title: string;
-    singer: string;
+    artist: string;
     rank: boolean[];
     memo: string;
     folder: string;

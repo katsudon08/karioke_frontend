@@ -31,13 +31,13 @@ const DetailComponent = () => {
                 </div>
             </div>
             <div>
-                <label htmlFor="singer" className=" w-full flex justify-start ">歌手</label>
+                <label htmlFor="artist" className=" w-full flex justify-start ">歌手</label>
                 <div
-                    aria-label="歌手名"
+                    aria-label="アーティスト名"
                     className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
-                    id="singer"
+                    id="artist"
                 >
-                    歌手名
+                    アーティスト名
                 </div>
             </div>
             <div>
