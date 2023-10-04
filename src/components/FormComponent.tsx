@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
-const FormComponent = ({ buttonLabel }: { buttonLabel: string }) => {
+const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
     const [colorFlags, setColorFlags] = useState([...Array(5).fill(false)])
     const router = useRouter()
 
@@ -11,7 +11,10 @@ const FormComponent = ({ buttonLabel }: { buttonLabel: string }) => {
         e.preventDefault()
 
         console.log("submit")
-        router.replace("/", { scroll: false })
+        isCreate ?
+            router.replace("/create-tag", { scroll: false })
+            :
+            router.replace("/edit-tag", { scroll: false })
     }
 
     const handleColorChange = (num: number) => {
@@ -72,7 +75,7 @@ const FormComponent = ({ buttonLabel }: { buttonLabel: string }) => {
                 </textarea>
             </div>
             <button className=" w-full px-4 py-2  text-white bg-blue-500 rounded-lg hover:bg-blue-400 hover:scale-95 duration-200 ">
-                {buttonLabel}
+                次へ
             </button>
         </form>
     );

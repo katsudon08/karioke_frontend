@@ -56,6 +56,7 @@ const DetailComponent = () => {
                 <label htmlFor="key" className=" w-full flex justify-start ">キー</label>
                 <input
                     aria-label="キーのプラスマイナス"
+                    readOnly
                     value={50}
                     type="range"
                     className=" w-full  py-2 rounded-lg  disabled:bg-blue-400 disabled:text-blue-400 disabled:border-blue-400 "
