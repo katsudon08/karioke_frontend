@@ -1,20 +1,26 @@
 "use client"
 
-import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { Song } from "@/types";
+import { usePathname, useRouter } from "next/navigation";
+import { FormEvent, useState, useRef } from "react";
 
 const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
+    const [song, setSong] = useState<Song>({
+        title: "",
+        artist: "",
+        rank: 0,
+        key: 0,
+    })
+    const ref = useRef<HTMLInputElement>(null)
     const [colorFlags, setColorFlags] = useState([...Array(5).fill(false)])
     const router = useRouter()
+    const pathname = usePathname()
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
 
-        console.log("submit")
-        isCreate ?
-            router.replace("/create-tag", { scroll: false })
-            :
-            router.replace("/edit-tag", { scroll: false })
+        console.log(ref.current?.value)
+        // router.push(pathname + "/tag", { scroll: false })
     }
 
     const handleColorChange = (num: number) => {
@@ -33,6 +39,8 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
             <div>
                 <label htmlFor="title" className=" w-full flex justify-start ">タイトル</label>
                 <input
+                    ref={ref}
+                    required
                     type="text"
                     className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                     id="title"
@@ -41,6 +49,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
             <div>
                 <label htmlFor="artist" className=" w-full flex justify-start ">アーティスト</label>
                 <input
+                    required
                     type="text"
                     className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                     id="artist"
@@ -61,6 +70,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
             <div>
                 <label htmlFor="key" className=" w-full flex justify-start ">キー</label>
                 <input
+                    required
                     type="range"
                     className=" w-full  py-2 rounded-lg focus:outline-none focus:border-blue-400 "
                     id="key"

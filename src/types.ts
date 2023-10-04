@@ -3,5 +3,5 @@ export interface Song {
     artist: string;
     rank: number;
     key: number;
-    memo: string;
+    memo?: string;
 }
