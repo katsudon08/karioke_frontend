@@ -11,16 +11,38 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
         rank: 0,
         key: 0,
     })
-    const ref = useRef<HTMLInputElement>(null)
+    const refs = [...Array(3)].map(() => (useRef<HTMLInputElement>(null)))
+    const memoRef = useRef<HTMLTextAreaElement>(null)
     const [colorFlags, setColorFlags] = useState([...Array(5).fill(false)])
     const router = useRouter()
     const pathname = usePathname()
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
+        let rank = 0
 
-        console.log(ref.current?.value)
-        // router.push(pathname + "/tag", { scroll: false })
+        refs.map((v) => (
+            console.log(v.current?.value)
+        ))
+        console.log(memoRef.current?.value)
+
+        colorFlags.map((v) => (
+            v && rank++
+        ))
+
+        console.log(rank)
+
+        setSong({
+            title: String(refs[0].current?.value),
+            artist: String(refs[1].current?.value),
+            rank: rank,
+            key: Number(refs[2].current?.value)-50,
+            memo: memoRef.current?.value
+        })
+
+        console.log(song)
+
+        // router.push(`${pathname}/tag`, { scroll: false })
     }
 
     const handleColorChange = (num: number) => {
@@ -39,7 +61,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
             <div>
                 <label htmlFor="title" className=" w-full flex justify-start ">タイトル</label>
                 <input
-                    ref={ref}
+                    ref={refs[0]}
                     required
                     type="text"
                     className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
@@ -49,6 +71,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
             <div>
                 <label htmlFor="artist" className=" w-full flex justify-start ">アーティスト</label>
                 <input
+                    ref={refs[1]}
                     required
                     type="text"
                     className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
@@ -70,6 +93,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
             <div>
                 <label htmlFor="key" className=" w-full flex justify-start ">キー</label>
                 <input
+                    ref={refs[2]}
                     required
                     type="range"
                     className=" w-full  py-2 rounded-lg focus:outline-none focus:border-blue-400 "
@@ -79,6 +103,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
             <div>
                 <label htmlFor="memo" className=" w-full flex justify-start ">メモ</label>
                 <textarea
+                    ref={memoRef}
                     className=" shadow-sm border-2 w-full max-h-14 hidden-scrollbar px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                     id="memo"
                 >
