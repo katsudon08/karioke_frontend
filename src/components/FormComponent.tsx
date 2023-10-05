@@ -4,9 +4,16 @@ import { Song } from "@/types";
 import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useState, useRef, useEffect } from "react";
 
-const FormComponent = ({ isCreate, params }: { isCreate: boolean, params: Song | null }) => {
+const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
     const refs = [...Array(3)].map(() => (useRef<HTMLInputElement>(null)))
     const memoRef = useRef<HTMLTextAreaElement>(null)
+    const [song, setSong] = useState<Song>({
+        title: "",
+        artist: "",
+        rank: 0,
+        key: 50,
+        memo: ""
+    })
 
     const title = refs[0].current
     const artist = refs[1].current
@@ -52,17 +59,20 @@ const FormComponent = ({ isCreate, params }: { isCreate: boolean, params: Song |
     ))
 
     const editInit = () => {
-        if (params != null) {
-            if (title) title.value = params.title
-            if (artist) artist.value = params.artist
-            if (params.rank) handleColorChange(params.rank)
-            if (key) key.value = String(params.key)
-            if (memo) memo.value = params.memo ?? ""
+        // apiを記述(edit)
+        const params: Song = {
+            title: "aiuoe",
+            artist: "artist",
+            rank: 4,
+            key: 70,
+            memo: "memodesuyooo"
         }
+        setSong(params);
+        handleColorChange(params.rank - 1)
     }
 
     useEffect(() => {
-        (isCreate) || editInit()
+        isCreate || editInit()
     }, [])
 
     return (
@@ -71,7 +81,7 @@ const FormComponent = ({ isCreate, params }: { isCreate: boolean, params: Song |
                 <label htmlFor="title" className=" w-full flex justify-start ">タイトル</label>
                 <input
                     ref={refs[0]}
-                    defaultValue={title?.value}
+                    defaultValue={song.title}
                     required
                     type="text"
                     className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
@@ -82,7 +92,7 @@ const FormComponent = ({ isCreate, params }: { isCreate: boolean, params: Song |
                 <label htmlFor="artist" className=" w-full flex justify-start ">アーティスト</label>
                 <input
                     ref={refs[1]}
-                    defaultValue={artist?.value}
+                    defaultValue={song.artist}
                     required
                     type="text"
                     className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
@@ -105,7 +115,7 @@ const FormComponent = ({ isCreate, params }: { isCreate: boolean, params: Song |
                 <label htmlFor="key" className=" w-full flex justify-start ">キー</label>
                 <input
                     ref={refs[2]}
-                    defaultValue={key?.value}
+                    defaultValue={song.key}
                     required
                     type="range"
                     className=" w-full  py-2 rounded-lg focus:outline-none focus:border-blue-400 "
@@ -116,7 +126,7 @@ const FormComponent = ({ isCreate, params }: { isCreate: boolean, params: Song |
                 <label htmlFor="memo" className=" w-full flex justify-start ">メモ</label>
                 <textarea
                     ref={memoRef}
-                    defaultValue={memo?.value}
+                    defaultValue={song.memo}
                     className=" shadow-sm border-2 w-full max-h-14 hidden-scrollbar px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                     id="memo"
                 >
