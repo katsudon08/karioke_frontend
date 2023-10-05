@@ -5,3 +5,12 @@ export interface Song {
     key: number;
     memo?: string;
 }
+
+export interface Tag {
+    name: string;
+    checked: boolean;
+}
+
+export interface PostData extends Song {
+    tags: Tag[]
+}
