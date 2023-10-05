@@ -1,5 +1,6 @@
 "use client"
 
+import { Song } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
@@ -7,6 +8,12 @@ import { FormEvent } from "react";
 const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
     const router = useRouter()
     const hairetsu = ["Aaaaaaaaaaaaaaaaaaaaaaaaaaa", "B", "C"]
+
+    const title = localStorage.getItem("title")
+    const artist = localStorage.getItem("artist")
+    const rank = localStorage.getItem("rank")
+    const key = localStorage.getItem("key")
+    const memo = localStorage.getItem("memo")
 
     const handleAddTag = () => {
         console.log("tag add")
@@ -21,6 +28,21 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
 
     return (
         <form className=" w-full flex flex-col h-full py-4 px-4 bg-white " onSubmit={handleSubmit}>
+            <p>
+                {title}
+            </p>
+            <p>
+                {artist}
+            </p>
+            <p>
+                {rank}
+            </p>
+            <p>
+                {key}
+            </p>
+            <p>
+                {memo}
+            </p>
             <div className=" max-w-full space-y-6 ">
                 <label aria-label="タグ選択" className=" w-full flex justify-start ">タグを選択</label>
                 <div className=" flex space-x-2 ">

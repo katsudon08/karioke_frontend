@@ -2,24 +2,24 @@
 
 import { Song } from "@/types";
 import { usePathname, useRouter } from "next/navigation";
-import { FormEvent, useState, useRef } from "react";
+import { FormEvent, useState, useRef, useEffect } from "react";
 
-const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
-    const [song, setSong] = useState<Song>({
-        title: "",
-        artist: "",
-        rank: 0,
-        key: 0,
-    })
+const FormComponent = ({ isCreate, params }: { isCreate: boolean, params: Song | null }) => {
     const refs = [...Array(3)].map(() => (useRef<HTMLInputElement>(null)))
     const memoRef = useRef<HTMLTextAreaElement>(null)
+
+    const title = refs[0].current
+    const artist = refs[1].current
+    let rank = 0
+    const key = refs[2].current
+    const memo = memoRef.current
+
     const [colorFlags, setColorFlags] = useState([...Array(5).fill(false)])
     const router = useRouter()
     const pathname = usePathname()
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
-        let rank = 0
 
         refs.map((v) => (
             console.log(v.current?.value)
@@ -32,17 +32,12 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
 
         console.log(rank)
 
-        setSong({
-            title: String(refs[0].current?.value),
-            artist: String(refs[1].current?.value),
-            rank: rank,
-            key: Number(refs[2].current?.value)-50,
-            memo: memoRef.current?.value
-        })
-
-        console.log(song)
-
-        // router.push(`${pathname}/tag`, { scroll: false })
+        localStorage.setItem("title", String(title?.value))
+        localStorage.setItem("artist", String(artist?.value))
+        localStorage.setItem("rank", String(rank))
+        localStorage.setItem("key", String(Number(key?.value) - 50))
+        localStorage.setItem("memo", memo?.value ?? "")
+        router.push(`${pathname}/tag`)
     }
 
     const handleColorChange = (num: number) => {
@@ -56,12 +51,27 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
         v ? "text-yellow-400" : "text-gray-400"
     ))
 
+    const editInit = () => {
+        if (params != null) {
+            if (title) title.value = params.title
+            if (artist) artist.value = params.artist
+            if (params.rank) handleColorChange(params.rank)
+            if (key) key.value = String(params.key)
+            if (memo) memo.value = params.memo ?? ""
+        }
+    }
+
+    useEffect(() => {
+        (isCreate) || editInit()
+    }, [])
+
     return (
         <form className=" flex flex-col h-full py-4 space-y-4 px-4 " onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="title" className=" w-full flex justify-start ">タイトル</label>
                 <input
                     ref={refs[0]}
+                    defaultValue={title?.value}
                     required
                     type="text"
                     className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
@@ -72,6 +82,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
                 <label htmlFor="artist" className=" w-full flex justify-start ">アーティスト</label>
                 <input
                     ref={refs[1]}
+                    defaultValue={artist?.value}
                     required
                     type="text"
                     className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
@@ -94,6 +105,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
                 <label htmlFor="key" className=" w-full flex justify-start ">キー</label>
                 <input
                     ref={refs[2]}
+                    defaultValue={key?.value}
                     required
                     type="range"
                     className=" w-full  py-2 rounded-lg focus:outline-none focus:border-blue-400 "
@@ -104,6 +116,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
                 <label htmlFor="memo" className=" w-full flex justify-start ">メモ</label>
                 <textarea
                     ref={memoRef}
+                    defaultValue={memo?.value}
                     className=" shadow-sm border-2 w-full max-h-14 hidden-scrollbar px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                     id="memo"
                 >
