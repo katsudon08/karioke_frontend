@@ -44,7 +44,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
         localStorage.setItem("rank", String(rank))
         localStorage.setItem("key", String(Number(key?.value) - 50))
         localStorage.setItem("memo", memo?.value ?? "")
-        router.push(`${pathname}/tag`)
+        router.replace(`${pathname}/tag`)
     }
 
     const handleColorChange = (num: number) => {
