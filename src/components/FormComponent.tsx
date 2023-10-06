@@ -58,7 +58,8 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
     ))
 
     const editInit = () => {
-        // apiを記述(edit)
+        // TODO: apiでedit対象の曲情報を取得してくる
+
         const params: Song = {
             title: "aiuoe",
             artist: "artist",
@@ -72,6 +73,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
 
     useEffect(() => {
         isCreate || editInit()
+        // ESLintのwarningを無効化
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

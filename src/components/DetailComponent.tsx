@@ -11,7 +11,7 @@ const DetailComponent = () => {
         const flag = confirm("このデータを削除しますか？")
         console.log(flag)
 
-        router.replace("/", { scroll: false })
+        router.push("/")
     }
 
     const colors = [...colorFlags].map((v: boolean) => (

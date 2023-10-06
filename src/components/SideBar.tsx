@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const SideBar = ({ anchorEl, handleToggleVisible }: { anchorEl: boolean, handleToggleVisible: () => void }) => {
-    const [tags, setTags] = useState<string[]>([...Array(50)].map((v, i) => `タグ${i}`))
+    const [tags, setTags] = useState<string[]>([...Array(5)].map((v, i) => `タグ${i}`))
     const router = useRouter()
 
     const handleAddTag = () => {
