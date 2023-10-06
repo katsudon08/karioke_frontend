@@ -1,9 +1,9 @@
 import DisplayComponent from "@/components/DisplayComponent";
 
-const Page = () => {
+const page = ({ params }: { params: { name: string } }) => {
     return (
         <DisplayComponent />
     );
 }
 
-export default Page;
+export default page;
