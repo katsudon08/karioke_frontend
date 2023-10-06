@@ -1,11 +1,20 @@
 "use client"
 
+import { Song } from "@/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const DetailComponent = () => {
+const DetailComponent = ({ songData }: { songData: Song }) => {
     const colorFlags = [true, true, true, false, false]
     const router = useRouter()
+    // TODO: 選択した曲情報を取得してくる
+    const song: Song = {
+        title: "",
+        artist: "",
+        rank: 0,
+        key: 50,
+        memo: ""
+    }
 
     const handleConfirm = () => {
         const flag = confirm("このデータを削除しますか？")
@@ -27,6 +36,7 @@ const DetailComponent = () => {
                     className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                     id="title"
                 >
+                    {/* {songData.title} */}
                     タイトル名
                 </div>
             </div>
