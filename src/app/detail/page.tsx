@@ -5,21 +5,18 @@ import { Song } from "@/types";
 import { useEffect } from "react";
 
 const page = () => {
-    let title, artist, rank, key, memo
-    useEffect(() => {
-        title = localStorage.getItem("title")
-        artist = localStorage.getItem("artist")
-        rank = Number(localStorage.getItem("rank"))
-        key = Number(localStorage.getItem("key")) + 50
-        memo = localStorage.getItem("memo")
-    }, [])
+    const title = localStorage.getItem("title")
+    const artist = localStorage.getItem("artist")
+    const rank = Number(localStorage.getItem("rank"))
+    const key = Number(localStorage.getItem("key")) + 50
+    const memo = localStorage.getItem("memo")
 
     const songData: Song = {
         title: title ?? "",
         artist: artist ?? "",
         rank: rank ?? 0,
         key: key ?? 50,
-        memo: memo
+        memo: memo ?? ""
     }
 
     return (

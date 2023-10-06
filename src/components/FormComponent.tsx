@@ -58,17 +58,21 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
     ))
 
     const editInit = () => {
-        // TODO: apiでedit対象の曲情報を取得してくる
+        const title = localStorage.getItem("title")
+        const artist = localStorage.getItem("artist")
+        const rank = Number(localStorage.getItem("rank"))
+        const key = Number(localStorage.getItem("key")) + 50
+        const memo = localStorage.getItem("memo")
 
-        const params: Song = {
-            title: "aiuoe",
-            artist: "artist",
-            rank: 4,
-            key: 70,
-            memo: "memodesuyooo"
+        const songData: Song = {
+            title: title ?? "",
+            artist: artist ?? "",
+            rank: rank ?? 0,
+            key: key ?? 50,
+            memo: memo ?? ""
         }
-        setSong(params);
-        handleColorChange(params.rank - 1)
+        setSong(songData);
+        handleColorChange(songData.rank - 1)
     }
 
     useEffect(() => {

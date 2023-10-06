@@ -5,16 +5,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const DetailComponent = ({ songData }: { songData: Song }) => {
-    const colorFlags = [true, true, true, false, false]
     const router = useRouter()
+    const song: Song = songData
+    const colorFlags: boolean[] = [...Array(5).fill(false)].map((v: boolean, i: number) => (
+        (i <= song.rank) ? true : false
+    ))
     // TODO: 選択した曲情報を取得してくる
-    const song: Song = {
-        title: "",
-        artist: "",
-        rank: 0,
-        key: 50,
-        memo: ""
-    }
 
     const handleConfirm = () => {
         const flag = confirm("このデータを削除しますか？")
@@ -36,8 +32,7 @@ const DetailComponent = ({ songData }: { songData: Song }) => {
                     className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                     id="title"
                 >
-                    {/* {songData.title} */}
-                    タイトル名
+                    {song.title}
                 </div>
             </div>
             <div>
@@ -47,7 +42,7 @@ const DetailComponent = ({ songData }: { songData: Song }) => {
                     className=" shadow-sm border-2 w-full px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                     id="artist"
                 >
-                    アーティスト名
+                    {song.artist}
                 </div>
             </div>
             <div>
@@ -67,7 +62,7 @@ const DetailComponent = ({ songData }: { songData: Song }) => {
                 <input
                     aria-label="キーのプラスマイナス"
                     readOnly
-                    value={50}
+                    value={song.key}
                     type="range"
                     className=" w-full  py-2 rounded-lg  disabled:bg-blue-400 disabled:text-blue-400 disabled:border-blue-400 "
                     id="key"
@@ -80,7 +75,7 @@ const DetailComponent = ({ songData }: { songData: Song }) => {
                     className=" shadow-sm border-2 w-full max-h-16 hidden-scrollbar px-4 py-2 mt-0.5 rounded-lg focus:outline-none focus:border-blue-400 "
                     id="memo"
                 >
-                    メモ
+                    {song.memo}
                 </div>
             </div>
             <div className=" w-full flex justify-between ">
