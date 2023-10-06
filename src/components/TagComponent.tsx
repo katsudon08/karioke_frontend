@@ -57,9 +57,7 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
             Array.from(tags.filter((tag: Tag) => (tag.checked)))
         ))
 
-        // const postTags = [Array(tags.length)].map((v: string, i: number) => (
-        //     tags[i]
-        // ))
+        const nameTags: string[] = [...tags].map((tag: Tag) => tag.name)
 
         const postData: PostData = {
             title: title,
@@ -67,7 +65,7 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
             rank: Number(rank),
             key: Number(key),
             memo: memo,
-            tags: []
+            tags: nameTags
         }
 
         console.log("submit")

@@ -5,7 +5,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useState, useRef, useEffect } from "react";
 
 const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
-    const refs = [...Array(3)].map(() => (useRef<HTMLInputElement>(null)))
+    // useRef1をfor文で扱ってはいけない
+    const titleRef = useRef<HTMLInputElement>(null)
+    const artistRef = useRef<HTMLInputElement>(null)
+    const keyRef = useRef<HTMLInputElement>(null)
     const memoRef = useRef<HTMLTextAreaElement>(null)
     const [song, setSong] = useState<Song>({
         title: "",
@@ -15,12 +18,6 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
         memo: ""
     })
 
-    const title = refs[0].current
-    const artist = refs[1].current
-    let rank = 0
-    const key = refs[2].current
-    const memo = memoRef.current
-
     const [colorFlags, setColorFlags] = useState([...Array(5).fill(false)])
     const router = useRouter()
     const pathname = usePathname()
@@ -28,10 +25,12 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
 
-        refs.map((v) => (
-            console.log(v.current?.value)
-        ))
+        console.log(titleRef.current?.value)
+        console.log(artistRef.current?.value)
+        console.log(keyRef.current?.value)
         console.log(memoRef.current?.value)
+
+        let rank = 0
 
         colorFlags.map((v) => (
             v && rank++
@@ -39,11 +38,11 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
 
         console.log(rank)
 
-        localStorage.setItem("title", String(title?.value))
-        localStorage.setItem("artist", String(artist?.value))
+        localStorage.setItem("title", String(titleRef.current?.value))
+        localStorage.setItem("artist", String(artistRef.current?.value))
         localStorage.setItem("rank", String(rank))
-        localStorage.setItem("key", String(Number(key?.value) - 50))
-        localStorage.setItem("memo", memo?.value ?? "")
+        localStorage.setItem("key", String(Number(keyRef.current?.value) - 50))
+        localStorage.setItem("memo", memoRef.current?.value ?? "")
         router.replace(`${pathname}/tag`)
     }
 
@@ -73,6 +72,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
 
     useEffect(() => {
         isCreate || editInit()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -80,7 +80,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
             <div>
                 <label htmlFor="title" className=" w-full flex justify-start ">タイトル</label>
                 <input
-                    ref={refs[0]}
+                    ref={titleRef}
                     defaultValue={song.title}
                     required
                     type="text"
@@ -91,7 +91,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
             <div>
                 <label htmlFor="artist" className=" w-full flex justify-start ">アーティスト</label>
                 <input
-                    ref={refs[1]}
+                    ref={artistRef}
                     defaultValue={song.artist}
                     required
                     type="text"
@@ -114,7 +114,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
             <div>
                 <label htmlFor="key" className=" w-full flex justify-start ">キー</label>
                 <input
-                    ref={refs[2]}
+                    ref={keyRef}
                     defaultValue={song.key}
                     required
                     type="range"

@@ -12,5 +12,5 @@ export interface Tag {
 }
 
 export interface PostData extends Song {
-    tags: Tag[]
+    tags: string[]
 }
