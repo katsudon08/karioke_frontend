@@ -1,6 +1,7 @@
 "use client"
 
-import { PostData, Tag } from "@/types";
+import { getLocalStrageSong } from "@/api";
+import { PostData, Song, Tag } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -47,11 +48,7 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
-        const title = localStorage.getItem("title") ?? ""
-        const artist = localStorage.getItem("artist") ?? ""
-        const rank = localStorage.getItem("rank") ?? ""
-        const key = localStorage.getItem("key") ?? ""
-        const memo = localStorage.getItem("memo") ?? ""
+        const song: Song = getLocalStrageSong()
 
         setTags((tags: Tag[]) => (
             Array.from(tags.filter((tag: Tag) => (tag.checked)))
@@ -60,11 +57,11 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
         const nameTags: string[] = [...tags].map((tag: Tag) => tag.name)
 
         const postData: PostData = {
-            title: title,
-            artist: artist,
-            rank: Number(rank),
-            key: Number(key),
-            memo: memo,
+            title: song.title,
+            artist: song.artist,
+            rank: Number(song.rank),
+            key: Number(song.key),
+            memo: song.memo,
             tags: nameTags
         }
 

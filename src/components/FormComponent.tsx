@@ -3,6 +3,7 @@
 import { Song } from "@/types";
 import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useState, useRef, useEffect } from "react";
+import { getLocalStrageSong, setLocalStrageSong } from "@/api";
 
 const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
     // useRef1をfor文で扱ってはいけない
@@ -14,7 +15,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
         title: "",
         artist: "",
         rank: 0,
-        key: 50,
+        key: 13,
         memo: ""
     })
 
@@ -38,11 +39,13 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
 
         console.log(rank)
 
-        localStorage.setItem("title", String(titleRef.current?.value))
-        localStorage.setItem("artist", String(artistRef.current?.value))
-        localStorage.setItem("rank", String(rank))
-        localStorage.setItem("key", String(Number(keyRef.current?.value) - 50))
-        localStorage.setItem("memo", memoRef.current?.value ?? "")
+        setLocalStrageSong(
+            titleRef.current?.value,
+            artistRef.current?.value,
+            rank,
+            Number(keyRef.current?.value),
+            memoRef.current?.value
+        )
         router.replace(`${pathname}/tag`)
     }
 
@@ -58,21 +61,10 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
     ))
 
     const editInit = () => {
-        const title = localStorage.getItem("title")
-        const artist = localStorage.getItem("artist")
-        const rank = Number(localStorage.getItem("rank"))
-        const key = Number(localStorage.getItem("key")) + 50
-        const memo = localStorage.getItem("memo")
+        const song: Song = getLocalStrageSong()
 
-        const songData: Song = {
-            title: title ?? "",
-            artist: artist ?? "",
-            rank: rank ?? 0,
-            key: key ?? 50,
-            memo: memo ?? ""
-        }
-        setSong(songData);
-        handleColorChange(songData.rank - 1)
+        setSong(song);
+        handleColorChange(song.rank - 1)
     }
 
     useEffect(() => {
@@ -121,9 +113,11 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
                 <label htmlFor="key" className=" w-full flex justify-start ">キー</label>
                 <input
                     ref={keyRef}
-                    defaultValue={song.key}
                     required
                     type="range"
+                    defaultValue={song.key}
+                    min={0}
+                    max={25}
                     className=" w-full  py-2 rounded-lg focus:outline-none focus:border-blue-400 "
                     id="key"
                 />

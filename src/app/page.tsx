@@ -9,21 +9,21 @@ const page = () => {
             title: "title",
             artist: "artist",
             rank: 3,
-            key: 70,
+            key: 15,
             memo: "pepepepepepepepe"
         },
         {
             title: "ベノム",
             artist: "あっアー",
             rank: 4,
-            key: 40,
+            key: 17,
             memo: "どおしてだよぉぉぉぉ"
         },
         {
             title: "ベノム",
             artist: "あっアー",
             rank: 4,
-            key: 40,
+            key: 17,
             memo: "どおしてだよぉぉぉぉ"
         },
         // {

@@ -64,6 +64,8 @@ const DetailComponent = ({ songData }: { songData: Song }) => {
                     readOnly
                     value={song.key}
                     type="range"
+                    min={0}
+                    max={25}
                     className=" w-full  py-2 rounded-lg  disabled:bg-blue-400 disabled:text-blue-400 disabled:border-blue-400 "
                     id="key"
                 />

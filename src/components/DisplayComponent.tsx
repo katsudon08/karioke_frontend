@@ -1,5 +1,6 @@
 "use client"
 
+import { setLocalStrageSong } from "@/api";
 import { Song } from "@/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -16,11 +17,13 @@ const DisplayComponent = ({ songs }: { songs: Song[] }) => {
     }
 
     const handleAddDetailData = (title: string, artist: string, rank: number, key: number, memo: string) => {
-        localStorage.setItem("title", title)
-        localStorage.setItem("artist", artist)
-        localStorage.setItem("rank", String(rank))
-        localStorage.setItem("key", String(key-50))
-        localStorage.setItem("memo", memo)
+        setLocalStrageSong(
+            title,
+            artist,
+            rank,
+            key,
+            memo
+        )
 
         router.push("/detail")
     }
@@ -30,7 +33,7 @@ const DisplayComponent = ({ songs }: { songs: Song[] }) => {
             <div className=" h-full w-full flex justify-center ">
                 <main aria-label="曲情報一覧ページ" className=" bg-white w-full h-full py-6 px-4 max-w-3xl shadow-xl flex flex-col overflow-y-scroll hidden-scrollbar space-y-3 ">
                     {songs.map((song: Song, i: number) => (
-                        <div key={i} className=" h-auto w-full bg-white shadow-md border-l-8 border-blue-400 py-6 space-y-2 px-4 rounded-md hover:border-blue-300 " onClick={() => handleAddDetailData(song.title, song.artist, song.rank, song.key, song.memo ?? "")}>
+                        <div key={i} className=" h-auto w-full bg-white shadow-md border-l-8 border-blue-400 py-6 space-y-2 px-4 rounded-md hover:border-blue-300 cursor-pointer " onClick={() => handleAddDetailData(song.title, song.artist, song.rank, song.key, song.memo ?? "")}>
                             <div className=" w-full flex flex-col space-y-1 ">
                                 <span className=" whitespace-nowrap overflow-hidden text-ellipsis ">タイトル: {song.title}</span>
                                 <span className=" whitespace-nowrap overflow-hidden text-ellipsis ">アーティスト: {song.artist}</span>

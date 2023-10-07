@@ -9,14 +9,14 @@ const page = ({ params }: { params: { name: string } }) => {
             title: "title",
             artist: "artist",
             rank: 3,
-            key: 70,
+            key: 8,
             memo: "pepepepepepepepe"
         },
         {
             title: "ベノム",
             artist: "あっアー",
             rank: 4,
-            key: 40,
+            key: 20,
             memo: "どおしてだよぉぉぉぉ"
         }
     ]
