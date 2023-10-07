@@ -1,12 +1,13 @@
 "use client"
 
+import { GetLocalStrageSong } from "@/api";
 import { Song } from "@/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const DetailComponent = ({ songData }: { songData: Song }) => {
+const DetailComponent = () => {
     const router = useRouter()
-    const song: Song = songData
+    const song: Song = GetLocalStrageSong()
     const colorFlags: boolean[] = [...Array(5).fill(false)].map((v: boolean, i: number) => (
         (i <= song.rank) ? true : false
     ))

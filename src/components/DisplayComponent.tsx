@@ -1,6 +1,6 @@
 "use client"
 
-import { setLocalStrageSong } from "@/api";
+import { SetLocalStrageSong } from "@/api";
 import { Song } from "@/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -17,7 +17,7 @@ const DisplayComponent = ({ songs }: { songs: Song[] }) => {
     }
 
     const handleAddDetailData = (title: string, artist: string, rank: number, key: number, memo: string) => {
-        setLocalStrageSong(
+        SetLocalStrageSong(
             title,
             artist,
             rank,
@@ -25,7 +25,7 @@ const DisplayComponent = ({ songs }: { songs: Song[] }) => {
             memo
         )
 
-        router.push("/detail")
+        router.replace("/detail")
     }
 
     return (

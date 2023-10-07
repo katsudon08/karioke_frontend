@@ -1,6 +1,6 @@
 "use client"
 
-import { getLocalStrageSong } from "@/api";
+import { GetLocalStrageSong } from "@/api";
 import { PostData, Song, Tag } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -48,7 +48,7 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
-        const song: Song = getLocalStrageSong()
+        const song: Song = GetLocalStrageSong()
 
         setTags((tags: Tag[]) => (
             Array.from(tags.filter((tag: Tag) => (tag.checked)))

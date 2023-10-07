@@ -3,7 +3,7 @@
 import { Song } from "@/types";
 import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useState, useRef, useEffect } from "react";
-import { getLocalStrageSong, setLocalStrageSong } from "@/api";
+import { GetLocalStrageSong, SetLocalStrageSong } from "@/api";
 
 const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
     // useRef1をfor文で扱ってはいけない
@@ -39,7 +39,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
 
         console.log(rank)
 
-        setLocalStrageSong(
+        SetLocalStrageSong(
             titleRef.current?.value,
             artistRef.current?.value,
             rank,
@@ -61,7 +61,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
     ))
 
     const editInit = () => {
-        const song: Song = getLocalStrageSong()
+        const song: Song = GetLocalStrageSong()
 
         setSong(song);
         handleColorChange(song.rank - 1)
