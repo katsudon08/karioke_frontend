@@ -25,7 +25,7 @@ const DisplayComponent = ({ songs }: { songs: Song[] }) => {
             memo
         )
 
-        router.replace("/detail")
+        router.push("/detail")
     }
 
     return (

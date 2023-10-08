@@ -68,7 +68,7 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
         // TODO: postDataをapiでポストする（曲情報を作成）
 
         console.log("submit")
-        router.push("/")
+        router.replace("/")
     }
 
     return (

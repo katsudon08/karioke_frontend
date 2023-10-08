@@ -3,7 +3,7 @@
 import { Song } from "@/types";
 import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useState, useRef, useEffect } from "react";
-import { GetLocalStrageSong, SetLocalStrageSong } from "@/api";
+import { CreateColorFlags, GetLocalStrageSong, SetLocalStrageSong } from "@/api";
 
 const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
     // useRef1をfor文で扱ってはいけない
@@ -19,7 +19,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
         memo: ""
     })
 
-    const [colorFlags, setColorFlags] = useState([...Array(5).fill(false)])
+    const [colorFlags, setColorFlags] = useState<boolean[]>([...Array(5).fill(false)])
     const router = useRouter()
     const pathname = usePathname()
 
@@ -50,10 +50,8 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
     }
 
     const handleColorChange = (num: number) => {
-        setColorFlags([...colorFlags].map((v: boolean, i: number) => (
-            (i <= num) ? true : false
-        )))
-        console.log(colorFlags)
+        const newColorFlags = CreateColorFlags(colorFlags, num)
+        setColorFlags(newColorFlags)
     }
 
     const colors = [...colorFlags].map((v: boolean) => (
@@ -64,7 +62,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
         const song: Song = GetLocalStrageSong()
 
         setSong(song);
-        handleColorChange(song.rank - 1)
+        handleColorChange(song.rank)
     }
 
     useEffect(() => {

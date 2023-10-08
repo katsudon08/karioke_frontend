@@ -1,6 +1,6 @@
 "use client"
 
-import { GetLocalStrageSong } from "@/api";
+import { CreateColorFlags, GetLocalStrageSong } from "@/api";
 import { Song } from "@/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -8,9 +8,11 @@ import { useRouter } from "next/navigation";
 const DetailComponent = () => {
     const router = useRouter()
     const song: Song = GetLocalStrageSong()
-    const colorFlags: boolean[] = [...Array(5).fill(false)].map((v: boolean, i: number) => (
-        (i <= song.rank) ? true : false
+    const colorFlags: boolean[] = CreateColorFlags([...Array(5).fill(false)], song.rank)
+    const colors = [...colorFlags].map((v: boolean) => (
+        v ? "text-yellow-400" : "text-gray-400"
     ))
+    
     // TODO: 選択した曲情報を取得してくる
 
     const handleConfirm = () => {
@@ -20,9 +22,6 @@ const DetailComponent = () => {
         router.push("/")
     }
 
-    const colors = [...colorFlags].map((v: boolean) => (
-        v ? "text-yellow-400" : "text-gray-400"
-    ))
 
     return (
         <div className=" flex flex-col h-full py-4 space-y-4 px-4 ">
