@@ -102,7 +102,9 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
                                 <label htmlFor={String(i)} className=" whitespace-nowrap ">{v.name}</label>
                             </div>
                             <div className=" grow " />
-                            <input id={String(i)} name={v.name} type="checkbox" defaultChecked={v.checked} className=" webkit-scale-150 " onChange={(e: ChangeEvent) => handleToggleChange(i)} />
+                            <div className=" flex flex-col justify-center ">
+                                <input id={String(i)} size={50} name={v.name} type="checkbox" defaultChecked={v.checked} className=" scale-150 " onChange={(e: ChangeEvent) => handleToggleChange(i)} />
+                            </div>
                         </li>
                     ))}
                 </ul>

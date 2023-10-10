@@ -11,7 +11,7 @@
         /* Chrome, Safari 対応 */
         display: none;
     }
-    .webkit-scale-150 {
-        -webkit-transform: -webkit-transform scale(150);
+    .scale-200z {
+        transform: scale(200)
     }
 }
