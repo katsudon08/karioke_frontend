@@ -11,6 +11,7 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
     const router = useRouter()
     const ref = useRef<HTMLInputElement>(null)
     const [anchorEl, setAnchorEl] = useState<boolean>(false)
+    // TODO: タグの取得
     const [tags, setTags] = useState<Tag[]>([])
 
     const handleAddTag = () => {
@@ -25,10 +26,12 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
         const tagsMap = new Map(newTags.map((newTag) => [newTag.name, newTag]))
         const tagsMapArray = Array.from(tagsMap.values())
 
-        setAnchorEl((tagsMapArray.length < newTags.length))
+        setAnchorEl((tagsMapArray.length < newTags.length)) 
 
         if (ref.current?.value !== "") setTags(tagsMapArray)
         if (ref.current?.value) ref.current.value = ""
+
+        // TODO: 新しいタグの作成
     }
 
     const handleToggleChange = (num: number) => {
