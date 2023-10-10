@@ -99,11 +99,11 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
                 <p className=" w-full flex justify-start ">ランク</p>
                 <div>
                     <span className=" flex justify-center ">
-                        <input key={0} id="review01" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(0)} /><label htmlFor="review01" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[0]}>★</label>
-                        <input key={1} id="review02" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(1)} /><label htmlFor="review02" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[1]}>★</label>
-                        <input key={2} id="review03" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(2)} /><label htmlFor="review03" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[2]}>★</label>
-                        <input key={3} id="review04" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(3)} /><label htmlFor="review04" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[3]}>★</label>
-                        <input key={4} id="review05" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(4)} /><label htmlFor="review05" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[4]}>★</label>
+                        <input key={0} id="review01" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(1)} /><label htmlFor="review01" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[0]}>★</label>
+                        <input key={1} id="review02" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(2)} /><label htmlFor="review02" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[1]}>★</label>
+                        <input key={2} id="review03" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(3)} /><label htmlFor="review03" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[2]}>★</label>
+                        <input key={3} id="review04" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(4)} /><label htmlFor="review04" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[3]}>★</label>
+                        <input key={4} id="review05" type="checkbox" className=" hidden " onClick={(e) => handleColorChange(5)} /><label htmlFor="review05" className={" text-3xl px-2 cursor-pointer hover:text-yellow-400 " + colors[4]}>★</label>
                     </span>
                 </div>
             </div>

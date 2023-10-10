@@ -26,7 +26,7 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
         const tagsMap = new Map(newTags.map((newTag) => [newTag.name, newTag]))
         const tagsMapArray = Array.from(tagsMap.values())
 
-        setAnchorEl((tagsMapArray.length < newTags.length)) 
+        setAnchorEl((tagsMapArray.length < newTags.length))
 
         if (ref.current?.value !== "") setTags(tagsMapArray)
         if (ref.current?.value) ref.current.value = ""
@@ -102,7 +102,7 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
                                 <label htmlFor={String(i)} className=" whitespace-nowrap ">{v.name}</label>
                             </div>
                             <div className=" grow " />
-                            <input id={String(i)} name={v.name} type="checkbox" defaultChecked={v.checked} className=" scale-150 " onChange={(e: ChangeEvent) => handleToggleChange(i)} />
+                            <input id={String(i)} name={v.name} type="checkbox" defaultChecked={v.checked} className=" webkit-scale-150 " onChange={(e: ChangeEvent) => handleToggleChange(i)} />
                         </li>
                     ))}
                 </ul>
