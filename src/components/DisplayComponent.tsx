@@ -1,6 +1,6 @@
 "use client"
 
-import { SetLocalStrageSong } from "@/api";
+import { SetLocalStrageSong } from "@/localstrage";
 import { Song } from "@/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

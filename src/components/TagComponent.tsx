@@ -1,6 +1,6 @@
 "use client"
 
-import { GetLocalStrageSong } from "@/api";
+import { GetLocalStrageSong } from "@/localstrage";
 import { PostData, Song, Tag } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

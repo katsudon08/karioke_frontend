@@ -3,7 +3,7 @@
 import { Song } from "@/types";
 import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useState, useRef, useEffect } from "react";
-import { CreateColorFlags, GetLocalStrageSong, GetLocalStrageTag, SetLocalStrageSong, SetLocalStrageTag } from "@/api";
+import { CreateColorFlags, GetLocalStrageSong, GetLocalStrageTag, SetLocalStrageSong, SetLocalStrageTag } from "@/localstrage";
 
 const TagEditComponent = () => {
     // useRef1をfor文で扱ってはいけない

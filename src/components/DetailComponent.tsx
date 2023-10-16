@@ -1,6 +1,6 @@
 "use client"
 
-import { CreateColorFlags, GetLocalStrageSong } from "@/api";
+import { CreateColorFlags, GetLocalStrageSong } from "@/localstrage";
 import { Song } from "@/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,7 @@ const DetailComponent = () => {
     const colors = [...colorFlags].map((v: boolean) => (
         v ? "text-yellow-400" : "text-gray-400"
     ))
-    
+
     // TODO: 選択した曲情報を取得してくる
 
     const handleConfirm = () => {
