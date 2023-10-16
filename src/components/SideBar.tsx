@@ -3,7 +3,7 @@
 import { getTags } from "@/api";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { use, useState } from "react";
+import { use } from "react";
 
 const SideBar = ({ anchorEl, handleToggleVisible }: { anchorEl: boolean, handleToggleVisible: () => void }) => {
     // タグ一覧を取得
