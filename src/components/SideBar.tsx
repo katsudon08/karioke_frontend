@@ -1,6 +1,6 @@
 "use client"
 
-import { getTags } from "@/api";
+import { createTag, getTags } from "@/api";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { use } from "react";
@@ -11,8 +11,8 @@ const SideBar = ({ anchorEl, handleToggleVisible }: { anchorEl: boolean, handleT
     const router = useRouter()
 
     const handleAddTag = () => {
-        const tagName: string | null = prompt("新しく作成するタグの名前を入力してください")
-        console.log(tagName)
+        handleToggleVisible()
+        router.push("/tag-create")
     }
 
     const handleSelectTag = () => {

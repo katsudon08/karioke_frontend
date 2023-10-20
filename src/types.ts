@@ -6,6 +6,10 @@ export interface Song {
     memo?: string;
 }
 
+export interface SongOnId extends Song {
+    id: number;
+}
+
 export interface Tag {
     name: string;
     checked: boolean;

@@ -1,23 +1,22 @@
 "use client"
 
-import { Song } from "@/types";
-import { usePathname, useRouter } from "next/navigation";
-import { FormEvent, useState, useRef, useEffect } from "react";
-import { CreateColorFlags, GetLocalStrageSong, GetLocalStrageTag, SetLocalStrageSong, SetLocalStrageTag } from "@/localstrage";
+import { useRouter } from "next/navigation";
+import { useState, useRef, useEffect, FormEvent, use } from "react";
+import { GetLocalStrageTag, SetLocalStrageSong, SetLocalStrageTag } from "@/localstrage";
 
-const TagEditComponent = () => {
+const TagEditOrCreateComponent = ({ isCreate, handleSetTag }: { isCreate: boolean, handleSetTag(tagName: string): void }) => {
     // useRef1をfor文で扱ってはいけない
     const tagNameRef = useRef<HTMLInputElement>(null)
     const [tagName, setTagName] = useState<string>("")
     const router = useRouter()
 
     useEffect(() => {
-        setTagName(GetLocalStrageTag())
+        isCreate || setTagName(GetLocalStrageTag())
     }, [])
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
-        // TODO: タグのアップデート
+        handleSetTag(tagNameRef.current?.value ?? "")
         router.replace("/")
     }
 
@@ -36,10 +35,10 @@ const TagEditComponent = () => {
             </div>
             <div className=" grow "/>
             <button className=" w-full px-4 py-2  text-white bg-blue-500 rounded-lg hover:bg-blue-400 hover:scale-95 duration-200 ">
-                確定
+                {isCreate ? "追加" : "確定"}
             </button>
         </form>
     );
 }
 
-export default TagEditComponent;
+export default TagEditOrCreateComponent;

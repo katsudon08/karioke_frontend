@@ -41,6 +41,16 @@ export const GetLocalStrageTag = () => {
     }
 }
 
+export const GetLocalStrageId = () => {
+    if (typeof window !== 'undefined') {
+        const id = localStorage.getItem("id") ?? ""
+
+        return Number(id)
+    } else {
+        return 0
+    }
+}
+
 export const SetLocalStrageSong = (title: string | undefined, artist: string | undefined, rank: number, key: number | undefined, memo: string | undefined) => {
     localStorage.setItem("title", title ?? "")
     localStorage.setItem("artist", artist ?? "")
@@ -51,6 +61,10 @@ export const SetLocalStrageSong = (title: string | undefined, artist: string | u
 
 export const SetLocalStrageTag = (name: string | undefined) => {
     localStorage.setItem("tagName", name ?? "")
+}
+
+export const SetLocalStrageId = (id: number | undefined) => {
+    localStorage.setItem("id", String(id) ?? "0")
 }
 
 export const CreateColorFlags = (colorFrags: boolean[], num: number) => {

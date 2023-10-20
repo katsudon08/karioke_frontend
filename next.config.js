@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
+const rewrites = process.env.NODE_ENV === 'development' ? [
+    {
+        source: '/:path*',
+        destination: 'http://localhost:8000/:path*'
+    }
+] : []
+
 const nextConfig = {
     reactStrictMode: true,
     // 全ての API routes にマッチ
@@ -15,6 +22,9 @@ const nextConfig = {
             },
         ]
     },
+    async rewrites() {
+        return rewrites
+    }
 }
 
 module.exports = nextConfig
