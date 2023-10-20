@@ -1,13 +1,26 @@
-"use client"
-
-import { createTag, getTags } from "@/api";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { use } from "react";
+import { cache, use } from "react";
+
+const getTags = cache(async (): Promise<string[]> => {
+    const url = "http://localhost:8000/song"
+
+    const response = await fetch(`${url}/tag`, {
+        cache: "no-store"
+    })
+
+    if (!response.ok) {
+        throw new Error("データの取得に失敗しました.")
+    }
+
+    const data = await response.json()
+
+    return data
+})
 
 const SideBar = ({ anchorEl, handleToggleVisible }: { anchorEl: boolean, handleToggleVisible: () => void }) => {
     // タグ一覧を取得
-    const tags: string[] = use(getTags())
+    const tags: string[] = [...use(getTags())].filter(tag => tag != null && tag !== "")
     const router = useRouter()
 
     const handleAddTag = () => {
@@ -27,7 +40,7 @@ const SideBar = ({ anchorEl, handleToggleVisible }: { anchorEl: boolean, handleT
 
     const handleSwitchTag = (tagName: string) => {
         handleToggleVisible()
-        router.push(`/${tagName}`)
+        router.push("/"+tagName)
     }
 
     return (

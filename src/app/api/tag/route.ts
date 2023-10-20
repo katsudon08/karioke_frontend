@@ -1,15 +1,18 @@
 import { NextRequest } from "next/server";
 
+const url = "http://localhost:8000/song/"
+
 export async function POST(request: NextRequest) {
     const body = await request.json()
     console.log(body)
 
-    const response = await fetch("http://localhost:8000/song/tag", {
+    const response = await fetch(url+"tag", {
         method: "POST",
+        cache: "no-store",
         headers: {
             "Content-type": "application/json",
         },
-        body: JSON.stringify({ body })
+        body: JSON.stringify(body)
     })
 
     if (!response.ok) {
@@ -18,5 +21,5 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json()
 
-    return Response.json(data)
+    return new Response(JSON.stringify(data))
 }

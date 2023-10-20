@@ -1,7 +1,8 @@
 "use client"
 
-import { SetLocalStrageId, SetLocalStrageSong } from "@/localstrage";
-import { Song, SongOnId } from "@/types";
+import { SetLocalStrageId } from "@/lib/setStrageId";
+import { SetLocalStrageSong } from "@/lib/setStrageSong";
+import { SongOnId } from "@/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 

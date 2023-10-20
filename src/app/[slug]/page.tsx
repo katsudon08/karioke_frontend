@@ -1,11 +1,12 @@
 import DisplayComponent from "@/components/DisplayComponent";
-import { Song } from "@/types";
+import { SongOnId } from "@/types";
 
-const page = ({ params }: { params: { name: string } }) => {
+const page = ({ slug }: { slug: string }) => {
     // TODO: apiでparamsのタグ名の曲情報一覧を取得
 
-    const songs: Song[] = [
+    const songs: SongOnId[] = [
         {
+            id: 1,
             title: "title",
             artist: "artist",
             rank: 3,
@@ -13,6 +14,7 @@ const page = ({ params }: { params: { name: string } }) => {
             memo: "pepepepepepepepe"
         },
         {
+            id: 2,
             title: "ベノム",
             artist: "あっアー",
             rank: 4,
@@ -27,3 +29,14 @@ const page = ({ params }: { params: { name: string } }) => {
 }
 
 export default page;
+
+// const page = ({ param }: { param: { slug: string } }) => {
+//     return (
+//         <div>
+//             {/* {param.slug} */}
+//             a
+//         </div>
+//     );
+// }
+
+// export default page;

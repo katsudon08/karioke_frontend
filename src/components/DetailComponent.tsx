@@ -1,6 +1,7 @@
 "use client"
 
-import { CreateColorFlags, GetLocalStrageSong } from "@/localstrage";
+import { CreateColorFlags } from "@/lib/createColor";
+import { GetLocalStrageSong } from "@/lib/getStrageSong";
 import { Song } from "@/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

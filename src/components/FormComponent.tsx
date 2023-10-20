@@ -1,9 +1,11 @@
 "use client"
 
+import { CreateColorFlags } from "@/lib/createColor";
+import { GetLocalStrageSong } from "@/lib/getStrageSong";
+import { SetLocalStrageSong } from "@/lib/setStrageSong";
 import { Song } from "@/types";
 import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useState, useRef, useEffect } from "react";
-import { CreateColorFlags, GetLocalStrageSong, SetLocalStrageSong } from "@/localstrage";
 
 const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
     // useRef1をfor文で扱ってはいけない

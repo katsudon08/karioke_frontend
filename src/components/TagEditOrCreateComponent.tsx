@@ -1,8 +1,8 @@
 "use client"
 
+import { GetLocalStrageTag } from "@/lib/getStrageTag";
 import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect, FormEvent, use } from "react";
-import { GetLocalStrageTag, SetLocalStrageSong, SetLocalStrageTag } from "@/localstrage";
 
 const TagEditOrCreateComponent = ({ isCreate, handleSetTag }: { isCreate: boolean, handleSetTag(tagName: string): void }) => {
     // useRef1をfor文で扱ってはいけない

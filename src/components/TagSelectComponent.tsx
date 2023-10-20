@@ -1,11 +1,10 @@
 "use client"
 
-import { GetLocalStrageSong, SetLocalStrageTag } from "@/localstrage";
-import { PostData, Song, Tag } from "@/types";
+import { SetLocalStrageTag } from "@/lib/setStrageTag";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import { FormEvent, useState, useRef, ChangeEvent } from "react";
+import { useState } from "react";
 
 const TagSelectComponent = ({ tagNames }: { tagNames: string[] }) => {
     const router = useRouter()
