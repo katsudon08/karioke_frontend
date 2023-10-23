@@ -1,30 +1,22 @@
 import DisplayComponent from "@/components/DisplayComponent";
 import { SongOnId } from "@/types";
+import { cache, use } from "react";
 
-const page = ({ slug }: { slug: string }) => {
+const getSongs = cache(async (tag: string) => {
+    const response = await import("@/app/api/songs/route")
+
+    const data = await (await response.GET(tag)).json()
+
+    return data
+})
+
+const page = ({ params }: { params: { slug: string } }) => {
     // TODO: apiでparamsのタグ名の曲情報一覧を取得
 
-    const songs: SongOnId[] = [
-        {
-            id: 1,
-            title: "title",
-            artist: "artist",
-            rank: 3,
-            key: 8,
-            memo: "pepepepepepepepe"
-        },
-        {
-            id: 2,
-            title: "ベノム",
-            artist: "あっアー",
-            rank: 4,
-            key: 20,
-            memo: "どおしてだよぉぉぉぉ"
-        }
-    ]
+    const songs: SongOnId[] = use(getSongs(decodeURI(params.slug)))
 
     return (
-        <DisplayComponent songs={songs}/>
+        <DisplayComponent songs={songs} />
     );
 }
 

@@ -18,3 +18,5 @@ export interface Tag {
 export interface PostData extends Song {
     tags: string[]
 }
+
+export const URL = "http://localhost:8000/song"

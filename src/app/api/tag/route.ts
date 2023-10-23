@@ -1,22 +1,20 @@
-import { NextRequest } from "next/server";
+import { URL } from "@/types";
 
-const url = "http://localhost:8000/song/"
-
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
     const body = await request.json()
     console.log(body)
 
-    const response = await fetch(url+"tag", {
+    const response = await fetch(URL+"/tag", {
         method: "POST",
         cache: "no-store",
         headers: {
-            "Content-type": "application/json",
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(body)
     })
 
     if (!response.ok) {
-        throw new Error("サーバーへの送信に失敗しました.")
+        throw new Error("データの送信に失敗しました.")
     }
 
     const data = await response.json()

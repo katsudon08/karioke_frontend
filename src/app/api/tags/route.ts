@@ -1,7 +1,7 @@
-const url = "http://localhost:8000/song/"
+import { URL } from "@/types"
 
 export async function GET() {
-    const response = await fetch(url, {
+    const response = await fetch(URL+"/tag", {
         cache: "no-store"
     })
 
@@ -11,5 +11,5 @@ export async function GET() {
 
     const data = await response.json()
 
-    return new Response(data)
+    return new Response(JSON.stringify(data))
 }

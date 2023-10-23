@@ -1,19 +1,12 @@
+import { URL } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { cache, use } from "react";
+import { cache, use, useEffect } from "react";
 
 const getTags = cache(async (): Promise<string[]> => {
-    const url = "http://localhost:8000/song"
+    const response = await import("@/app/api/tags/route")
 
-    const response = await fetch(`${url}/tag`, {
-        cache: "no-store"
-    })
-
-    if (!response.ok) {
-        throw new Error("データの取得に失敗しました.")
-    }
-
-    const data = await response.json()
+    const data = await (await response.GET()).json()
 
     return data
 })
