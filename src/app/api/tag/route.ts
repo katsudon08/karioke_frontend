@@ -21,3 +21,10 @@ export async function POST(request: Request) {
 
     return new Response(JSON.stringify(data))
 }
+
+export async function PUT(request: Request) {
+    const body = await request.json()
+    console.log(body)
+
+    return new Response(JSON.stringify("ok"))
+}

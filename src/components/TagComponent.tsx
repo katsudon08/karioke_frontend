@@ -30,7 +30,6 @@ const TagComponent = ({ isCreate, checkedTags }: { isCreate: boolean, checkedTag
         if (ref.current?.value !== "") setTags(tagsMapArray)
         if (ref.current?.value) ref.current.value = ""
 
-        // TODO: 新しいタグの作成
         const response = await fetch("/api/tag", {
             method: "POST",
             cache: "no-store",
@@ -79,7 +78,6 @@ const TagComponent = ({ isCreate, checkedTags }: { isCreate: boolean, checkedTag
             tags: nameTags
         }
 
-        // TODO: postDataをapiでポストする（曲情報を作成）
         const response = await fetch("/api/song", {
             method: "POST",
             cache: "no-store",

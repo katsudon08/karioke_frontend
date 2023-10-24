@@ -1,6 +1,5 @@
-import { createTag, getHomeSongs } from "@/api";
 import DisplayComponent from "@/components/DisplayComponent";
-import { Song, SongOnId } from "@/types";
+import { SongOnId } from "@/types";
 import { cache, use } from "react";
 
 const getSongs = cache(async () => {

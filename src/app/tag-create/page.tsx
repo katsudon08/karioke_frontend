@@ -22,6 +22,9 @@ const page = () => {
             throw new Error("データの送信に失敗しました.")
         }
 
+        const data = await response.json()
+        console.log(data)
+
         router.replace("/")
     }
 

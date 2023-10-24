@@ -1,9 +1,9 @@
 export interface Song {
-    title: string;
-    artist: string;
-    rank: number;
-    key: number;
-    memo?: string;
+    title: string
+    artist: string
+    rank: number
+    key: number
+    memo?: string
 }
 
 export interface SongOnId extends Song {
@@ -11,8 +11,13 @@ export interface SongOnId extends Song {
 }
 
 export interface Tag {
-    name: string;
-    checked: boolean;
+    name: string
+    checked: boolean
+}
+
+export interface TagOnId {
+    id: number
+    name: string
 }
 
 export interface PostData extends Song {

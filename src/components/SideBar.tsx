@@ -1,7 +1,6 @@
-import { URL } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { cache, use, useEffect } from "react";
+import { cache, use } from "react";
 
 const getTags = cache(async (): Promise<string[]> => {
     const response = await import("@/app/api/tags/route")

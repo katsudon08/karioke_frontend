@@ -21,14 +21,3 @@ const page = ({ params }: { params: { slug: string } }) => {
 }
 
 export default page;
-
-// const page = ({ param }: { param: { slug: string } }) => {
-//     return (
-//         <div>
-//             {/* {param.slug} */}
-//             a
-//         </div>
-//     );
-// }
-
-// export default page;
