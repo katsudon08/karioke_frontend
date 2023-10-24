@@ -7,14 +7,13 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { FormEvent, useState, useRef, ChangeEvent } from "react";
 
-const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
+const TagComponent = ({ isCreate, checkedTags }: { isCreate: boolean, checkedTags: Tag[] }) => {
     const router = useRouter()
     const ref = useRef<HTMLInputElement>(null)
     const [anchorEl, setAnchorEl] = useState<boolean>(false)
-    // TODO: タグの取得
-    const [tags, setTags] = useState<Tag[]>([])
+    const [tags, setTags] = useState<Tag[]>(checkedTags)
 
-    const handleAddTag = () => {
+    const handleAddTag = async () => {
         console.log("tag add")
         const addTag: Tag = {
             name: ref.current?.value ?? "",
@@ -32,6 +31,19 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
         if (ref.current?.value) ref.current.value = ""
 
         // TODO: 新しいタグの作成
+        const response = await fetch("/api/tag", {
+            method: "POST",
+            cache: "no-store",
+            body: JSON.stringify({ name: addTag.name })
+        })
+
+        if (!response.ok) {
+            throw new Error("データの送信に失敗しました.")
+        }
+
+        const data = await response.json()
+
+        console.log(data)
     }
 
     const handleToggleChange = (num: number) => {
@@ -49,17 +61,16 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
         console.log(newTags)
     }
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         const song: Song = GetLocalStrageSong()
 
-        setTags((tags: Tag[]) => (
-            Array.from(tags.filter((tag: Tag) => (tag.checked)))
-        ))
+        const filterTags = [...tags].filter(tag => tag.checked)
 
-        const nameTags: string[] = [...tags].map((tag: Tag) => tag.name)
+        const nameTags: string[] = [...filterTags].map((tag: Tag) => tag.name)
+        console.log(nameTags)
 
-        const postData: PostData = {
+        const post: PostData = {
             title: song.title,
             artist: song.artist,
             rank: Number(song.rank),
@@ -69,14 +80,26 @@ const TagComponent = ({ isCreate }: { isCreate: boolean }) => {
         }
 
         // TODO: postDataをapiでポストする（曲情報を作成）
+        const response = await fetch("/api/song", {
+            method: "POST",
+            cache: "no-store",
+            body: JSON.stringify(post)
+        })
+
+        if (!response.ok) {
+            throw new Error("データの送信に失敗しました.")
+        }
+
+        const data = await response.text()
+        console.log(data)
 
         console.log("submit")
         router.replace("/")
     }
 
     return (
-        <form className=" w-full flex flex-col h-full py-4 px-4 bg-white " onSubmit={handleSubmit}>
-            <div className=" max-w-full space-y-6 ">
+        <form className=" w-full flex flex-col h-full px-4 bg-white " onSubmit={handleSubmit}>
+            <div className=" max-w-full space-y-6 py-6 ">
                 <label aria-label="タグ選択" className=" w-full flex justify-start ">タグを選択</label>
                 <div className=" flex space-x-2 ">
                     <input
