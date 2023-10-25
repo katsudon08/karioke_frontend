@@ -22,3 +22,7 @@ export async function POST(request: Request) {
 
     return new Response(data)
 }
+
+export async function PUT(request: Request) {
+    
+}
