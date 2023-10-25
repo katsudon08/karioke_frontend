@@ -4,9 +4,7 @@ import { GetLocalStrageId } from "@/lib/getStrageId";
 import { GetLocalStrageTag } from "@/lib/getStrageTag";
 import { TagOnId } from "@/types";
 import { useRouter } from "next/navigation";
-import { FormEvent, useEffect, useRef, useState } from "react";
-
-// TODO: tagのidを取得する必要がある
+import { FormEvent, useRef } from "react";
 
 const page = () => {
     const tagNameRef = useRef<HTMLInputElement>(null)
