@@ -26,5 +26,25 @@ export async function PUT(request: Request) {
     const body = await request.json()
     console.log(body)
 
-    return new Response(JSON.stringify("ok"))
+    const put = {
+        data: body
+    }
+
+    const response = await fetch(URL+"/tag", {
+        method: "PUT",
+        cache: "no-store",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(put)
+    })
+
+    if (!response.ok) {
+        throw new Error("データの送信に失敗しました.")
+    }
+
+    const data = await response.json()
+    console.log(data)
+
+    return new Response(JSON.stringify(data))
 }

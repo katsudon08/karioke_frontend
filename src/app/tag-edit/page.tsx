@@ -15,12 +15,17 @@ const page = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
 
+        const put: TagOnId = {
+            id: GetLocalStrageId(),
+            name: tagNameRef.current?.value ?? ""
+        }
+
         const response = await fetch("/api/tag", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(tagNameRef.current?.value ?? "")
+            body: JSON.stringify(put)
         })
 
         if (!response.ok) {
@@ -30,7 +35,7 @@ const page = () => {
         const data = await response.json()
         console.log(data)
 
-        // router.replace("/")
+        router.replace("/")
     }
 
     return (
