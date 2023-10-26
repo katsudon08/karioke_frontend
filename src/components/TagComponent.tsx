@@ -1,13 +1,14 @@
 "use client"
 
+import { GetLocalStrageId } from "@/lib/getStrageId";
 import { GetLocalStrageSong } from "@/lib/getStrageSong";
-import { PostData, Song, Tag } from "@/types";
+import { PostData, Song, SongOnId, Tag, TagOnId } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { FormEvent, useState, useRef, ChangeEvent } from "react";
 
-const TagComponent = ({ isCreate, checkedTags }: { isCreate: boolean, checkedTags: Tag[] }) => {
+const TagComponent = ({ isCreate, checkedTags, tagIds }: { isCreate: boolean, checkedTags: Tag[], tagIds: number[] }) => {
     const router = useRouter()
     const ref = useRef<HTMLInputElement>(null)
     const [anchorEl, setAnchorEl] = useState<boolean>(false)
@@ -60,7 +61,7 @@ const TagComponent = ({ isCreate, checkedTags }: { isCreate: boolean, checkedTag
         console.log(newTags)
     }
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleCreate = async (e: FormEvent) => {
         e.preventDefault()
         const song: Song = GetLocalStrageSong()
 
@@ -95,8 +96,58 @@ const TagComponent = ({ isCreate, checkedTags }: { isCreate: boolean, checkedTag
         router.replace("/")
     }
 
+    const handleEdit = async (e: FormEvent) => {
+        e.preventDefault()
+        const id: number = GetLocalStrageId()
+        const song: Song = GetLocalStrageSong()
+
+        const tagIndex: (number | null)[] = [...tags].map((tag: Tag, i: number) => {
+            if (tag.checked) {
+                return i
+            }else {
+                return null
+            }
+        })
+        // 配列からnullableな値を除去するため、型情報を書き換える必要がある
+        const filterTagIndex: number[] = [...tagIndex].filter((index): index is NonNullable<typeof index> => index !== null)
+        const filterTagIds = [...filterTagIndex].map(index => tagIds[index])
+
+        const putData: SongOnId = {
+            id: id,
+            title: song.title,
+            artist: song.artist,
+            rank: Number(song.rank),
+            key: Number(song.key),
+            memo: song.memo
+        }
+        console.log(putData)
+
+        const putTagIds: number[] = filterTagIds
+
+        const put = {
+            data: putData,
+            tagIds: putTagIds
+        }
+
+        const response = await fetch("/api/song", {
+            method: "PUT",
+            cache: "no-store",
+            body: JSON.stringify(put)
+        })
+
+        if (!response.ok) {
+            throw new Error("データの送信に失敗しました.")
+        }
+
+        const data = await response.text()
+        console.log(data)
+
+        console.log("submit")
+        router.replace("/")
+    }
+
     return (
-        <form className=" w-full flex flex-col h-full px-4 bg-white " onSubmit={handleSubmit}>
+        <form className=" w-full flex flex-col h-full px-4 bg-white " onSubmit={isCreate ? handleCreate : handleEdit}>
             <div className=" max-w-full space-y-6 py-6 ">
                 <label aria-label="タグ選択" className=" w-full flex justify-start ">タグを選択</label>
                 <div className=" flex space-x-2 ">

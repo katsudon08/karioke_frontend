@@ -24,5 +24,24 @@ export async function POST(request: Request) {
 }
 
 export async function PUT(request: Request) {
-    
+    const body = await request.json()
+    console.log(body)
+
+    const response = await fetch(URL, {
+        method: "PUT",
+        cache: "no-store",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    })
+
+    if (!response.ok) {
+        throw new Error("データの送信に失敗しました.")
+    }
+
+    const data = await response.json()
+    console.log(data)
+
+    return new Response(JSON.stringify(data))
 }

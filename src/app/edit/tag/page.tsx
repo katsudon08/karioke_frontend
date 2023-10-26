@@ -29,20 +29,21 @@ const page = () => {
     const filterTagIds = [...filterTagMaps].map(tag => tag.tagId)
     console.log("filterTagIds", filterTagIds)
 
-    const tagNames: TagOnId[] = use(getTags())
-    const filterTags = [...tagNames].filter(tag => tag.name != null && tag.name !== "")
-    console.log(filterTags)
+    const tagOnIds: TagOnId[] = use(getTags())
+    const filterTags = [...tagOnIds].filter(tag => tag.name != null && tag.name !== "")
+    console.log("test", filterTags)
     const checkedTags = [...filterTags].map(tag => ({
         name: tag.name,
         checked: filterTagIds.includes(tag.id)
     }))
 
-
+    const tagIds: number[] = [...filterTags].map(tag => tag.id)
+    console.log("test", tagIds)
 
     return (
         <div className=" h-full flex flex-col justify-center items-center text-center break-all py-6 px-6 ">
             <main aria-label="曲情報編集ページ" className=" bg-white h-fit w-full max-w-lg shadow-lg rounded-lg overflow-y-scroll hidden-scrollbar ">
-                <TagComponent isCreate={false} checkedTags={checkedTags}/>
+                <TagComponent isCreate={false} checkedTags={checkedTags} tagIds={tagIds}/>
             </main>
         </div>
     );
