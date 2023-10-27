@@ -2,14 +2,16 @@
 
 import TagComponent from "@/components/TagComponent";
 import { GetLocalStrageId } from "@/lib/getStrageId";
-import { TagOnId } from "@/types";
-import { cache, use } from "react";
+import { TagMap, TagOnId } from "@/types";
+import { cache, use, useEffect } from "react";
 
 const getTags = cache(async () => {
     const response = await import("@/app/api/tagOnIds/route")
 
-    await response.GET()
+    const cache = await (await response.GET()).json()
     const data = await (await response.GET()).json()
+    console.log("tagsキャッシュ", cache)
+    console.log("tagsデータ", data)
 
     return data
 })
@@ -17,14 +19,16 @@ const getTags = cache(async () => {
 const getTagMaps = cache(async () => {
     const response = await import("@/app/api/tagmap/route")
 
-    await response.GET()
+    const cache = await (await response.GET()).json()
     const data = await (await response.GET()).json()
+    console.log("tagmapsキャッシュ", cache)
+    console.log("tagmapsデータ", data)
 
     return data
 })
 
 const page = () => {
-    const tagmaps = use(getTagMaps())
+    const tagmaps: TagMap[] = use(getTagMaps())
     console.log(tagmaps)
     const filterTagMaps = [...tagmaps].filter(tagmap => tagmap.songId === GetLocalStrageId())
     console.log(filterTagMaps)
