@@ -13,10 +13,11 @@ const TagComponent = ({ isCreate, checkedTags, tagIds }: { isCreate: boolean, ch
     const ref = useRef<HTMLInputElement>(null)
     const [anchorEl, setAnchorEl] = useState<boolean>(false)
     const [tags, setTags] = useState<Tag[]>([])
+
     useEffect(() => {
         console.log("checkedTags", checkedTags)
         setTags(checkedTags)
-    }, [checkedTags])
+    }, [checkedTags, tags])
 
     const handleAddTag = async () => {
         console.log("tag add")
