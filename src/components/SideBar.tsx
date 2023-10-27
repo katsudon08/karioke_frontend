@@ -5,6 +5,7 @@ import { cache, use } from "react";
 const getTags = cache(async (): Promise<string[]> => {
     const response = await import("@/app/api/tags/route")
 
+    await response.GET()
     const data = await (await response.GET()).json()
 
     return data
