@@ -8,6 +8,7 @@ import { cache, use } from "react";
 const getTags = cache(async () => {
     const response = await import("@/app/api/tagOnIds/route")
 
+    await response.GET()
     const data = await (await response.GET()).json()
 
     return data
@@ -16,6 +17,7 @@ const getTags = cache(async () => {
 const getTagMaps = cache(async () => {
     const response = await import("@/app/api/tagmap/route")
 
+    await response.GET()
     const data = await (await response.GET()).json()
 
     return data

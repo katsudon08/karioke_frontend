@@ -5,6 +5,7 @@ import { cache, use } from "react";
 const getSongs = cache(async () => {
     const response = await import("@/app/api/songs/route")
 
+    await response.GET(null)
     const data = await (await response.GET(null)).json()
 
     return data
