@@ -5,14 +5,18 @@ import { GetLocalStrageSong } from "@/lib/getStrageSong";
 import { PostData, Song, SongOnId, Tag, TagOnId } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { FormEvent, useState, useRef, ChangeEvent } from "react";
 
 const TagComponent = ({ isCreate, checkedTags, tagIds }: { isCreate: boolean, checkedTags: Tag[], tagIds: number[] }) => {
     const router = useRouter()
     const ref = useRef<HTMLInputElement>(null)
     const [anchorEl, setAnchorEl] = useState<boolean>(false)
-    const [tags, setTags] = useState<Tag[]>(checkedTags)
+    const [tags, setTags] = useState<Tag[]>([])
+    useEffect(() => {
+        console.log("checkedTags", checkedTags)
+        setTags(checkedTags)
+    }, [checkedTags])
 
     const handleAddTag = async () => {
         console.log("tag add")
