@@ -64,3 +64,42 @@ export async function GET(tagName: string | null) {
 
     return new Response(JSON.stringify(songData))
 }
+
+export async function DELETE(request: Request) {
+    const body = await request.json()
+    console.log(body)
+
+    if (body === "") {
+        const response = await fetch(URL+"/home", {
+            method: "DELETE",
+            cache: "no-store"
+        })
+
+        if (!response.ok) {
+            throw new Error("データの削除に失敗しました.")
+        }
+
+        const data = await response.text()
+
+        return new Response(data)
+    }
+
+    const response = await fetch(URL+"/slug", {
+        method: "DELETE",
+        cache: "no-store",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            slug: body
+        })
+    })
+
+    if (!response.ok) {
+        throw new Error("データの削除に失敗しました.")
+    }
+
+    const data = await response.text()
+
+    return new Response(data)
+}

@@ -1,20 +1,29 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { cache, use } from "react";
+import { cache, useEffect, useState } from "react";
 
-const getTags = cache(async (): Promise<string[]> => {
+const getTags = async (): Promise<string[]> => {
     const response = await import("@/app/api/tags/route")
 
     await response.GET()
     const data = await (await response.GET()).json()
 
     return data
-})
+}
 
 const SideBar = ({ anchorEl, handleToggleVisible }: { anchorEl: boolean, handleToggleVisible: () => void }) => {
     // タグ一覧を取得
-    const tags: string[] = [...use(getTags())].filter(tag => tag != null && tag !== "")
+    const [tags, setTags] = useState<string[]>([])
     const router = useRouter()
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const fetchTags = await getTags()
+            setTags(fetchTags)
+        }
+
+        fetchData()
+    }, [])
 
     const handleAddTag = () => {
         handleToggleVisible()

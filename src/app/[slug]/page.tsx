@@ -1,6 +1,8 @@
+"use client"
+
 import DisplayComponent from "@/components/DisplayComponent";
 import { SongOnId } from "@/types";
-import { cache, use } from "react";
+import { cache, use, useEffect, useState } from "react";
 
 const getSongs = cache(async (tag: string) => {
     const response = await import("@/app/api/songs/route")
@@ -11,12 +13,19 @@ const getSongs = cache(async (tag: string) => {
 })
 
 const page = ({ params }: { params: { slug: string } }) => {
-    // TODO: apiでparamsのタグ名の曲情報一覧を取得
+    const [songs, setSongs] = useState<SongOnId[]>([])
 
-    const songs: SongOnId[] = use(getSongs(decodeURI(params.slug)))
+    useEffect(() => {
+        const fetchData = async () => {
+            const fetchSongs = await getSongs(decodeURI(params.slug))
+            setSongs(fetchSongs)
+        }
+
+        fetchData()
+    }, [])
 
     return (
-        <DisplayComponent songs={songs} />
+        <DisplayComponent songs={songs} slug={params.slug}/>
     );
 }
 
