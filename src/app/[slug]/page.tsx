@@ -22,7 +22,7 @@ const page = ({ params }: { params: { slug: string } }) => {
         }
 
         fetchData()
-    }, [])
+    }, [songs])
 
     return (
         <DisplayComponent songs={songs} slug={params.slug}/>

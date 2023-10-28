@@ -23,7 +23,7 @@ const page = () => {
         }
 
         fetchData()
-    }, [])
+    }, [songs])
 
     return (
         <DisplayComponent songs={songs} slug={""} />

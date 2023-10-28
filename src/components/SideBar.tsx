@@ -23,7 +23,7 @@ const SideBar = ({ anchorEl, handleToggleVisible }: { anchorEl: boolean, handleT
         }
 
         fetchData()
-    }, [])
+    }, [tags])
 
     const handleAddTag = () => {
         handleToggleVisible()
