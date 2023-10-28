@@ -1,17 +1,27 @@
 import TagSelectComponent from "@/components/TagSelectComponent";
-import { cache, use } from "react";
+import { TagOnId } from "@/types";
+import { cache, use, useEffect, useState } from "react";
 
-const getTags = cache(async () => {
+const getTags = async () => {
     const response = await import("@/app/api/tagOnIds/route")
 
     await response.GET()
     const data = await (await response.GET()).json()
 
     return data
-})
+}
 
 const page = () => {
-    const tags = [...use(getTags())].filter(tag => tag.name != null && tag.name !== "")
+    const [tags, setTags] = useState<TagOnId[]>([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const fetchTags = await getTags()
+            setTags(fetchTags)
+        }
+
+        fetchData()
+    }, [])
 
     return (
         <div className=" h-full w-full flex justify-center ">

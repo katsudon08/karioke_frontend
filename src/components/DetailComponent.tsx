@@ -1,6 +1,7 @@
 "use client"
 
 import { CreateColorFlags } from "@/lib/createColor";
+import { GetLocalStrageId } from "@/lib/getStrageId";
 import { GetLocalStrageSong } from "@/lib/getStrageSong";
 import { Song } from "@/types";
 import Link from "next/link";
@@ -14,11 +15,29 @@ const DetailComponent = () => {
         v ? "text-yellow-400" : "text-gray-400"
     ))
 
-    // TODO: 選択した曲情報を取得してくる
-
-    const handleConfirm = () => {
+    const handleConfirm = async () => {
         const flag = confirm("このデータを削除しますか？")
         console.log(flag)
+
+        if (flag) {
+            const response = await fetch("/api/song", {
+                method: "DELETE",
+                cache: "no-store",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    id: GetLocalStrageId()
+                })
+            })
+
+            if (!response.ok) {
+                throw new Error("データの削除に失敗しました.")
+            }
+
+            const data = await response.json()
+            console.log(data)
+        }
 
         router.push("/")
     }

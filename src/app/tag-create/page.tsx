@@ -12,6 +12,7 @@ const page = () => {
 
         const response = await fetch("/api/tag", {
             method: "POST",
+            cache: "no-store",
             headers: {
                 "Content-type": "application/json"
             },

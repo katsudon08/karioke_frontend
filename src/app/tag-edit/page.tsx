@@ -20,6 +20,7 @@ const page = () => {
 
         const response = await fetch("/api/tag", {
             method: "PUT",
+            cache: "no-store",
             headers: {
                 "Content-Type": "application/json"
             },

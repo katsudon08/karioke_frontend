@@ -45,3 +45,26 @@ export async function PUT(request: Request) {
 
     return new Response(JSON.stringify(data))
 }
+
+export async function DELETE(request: Request) {
+    const body = await request.json()
+    console.log(body)
+
+    const response = await fetch(URL, {
+        method: "DELETE",
+        cache: "no-store",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    })
+
+    if (!response.ok) {
+        throw new Error("データの削除に失敗しました.")
+    }
+
+    const data = await response.json()
+    console.log(data)
+
+    return new Response(JSON.stringify(data))
+}
