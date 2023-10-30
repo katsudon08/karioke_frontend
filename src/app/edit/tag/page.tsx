@@ -3,9 +3,9 @@
 import TagComponent from "@/components/TagComponent";
 import { GetLocalStrageId } from "@/lib/getStrageId";
 import { TagMap, TagOnId } from "@/types";
-import { cache, use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-const getTags = cache(async () => {
+const getTags = async () => {
     const response = await import("@/app/api/tagOnIds/route")
 
     const cache = await (await response.GET()).json()
@@ -14,9 +14,9 @@ const getTags = cache(async () => {
     console.log("tagsデータ", data)
 
     return data
-})
+}
 
-const getTagMaps = cache(async () => {
+const getTagMaps = async () => {
     const response = await import("@/app/api/tagmap/route")
 
     const cache = await (await response.GET()).json()
@@ -25,9 +25,9 @@ const getTagMaps = cache(async () => {
     console.log("tagmapsデータ", data)
 
     return data
-})
+}
 
-const page = () => {
+const Page = () => {
     const [tagmaps, setTagmaps] = useState<TagMap[]>([])
     const [tagOnIds, setTagOnIds] = useState<TagOnId[]>([])
 
@@ -76,4 +76,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default Page;

@@ -1,20 +1,32 @@
-import TagComponent from "@/components/TagComponent";
-import { cache, use } from "react";
+"use client"
 
-const getTags = cache(async () => {
+import TagComponent from "@/components/TagComponent";
+import { TagOnId } from "@/types";
+import { useEffect, useState } from "react";
+
+const getTags = async () => {
     const response = await import("@/app/api/tags/route")
 
     await response.GET()
     const data = await (await response.GET()).json()
 
     return data
-})
+}
 
-const page = () => {
-    const tagNames = use(getTags())
-    const filterTags = [...tagNames].filter(tag => tag != null && tag !== "")
+const Page = () => {
+    const [tags, setTags] = useState<TagOnId[]>([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const fetchTags = await getTags()
+            setTags(fetchTags)
+        }
+
+        fetchData()
+    }, [tags])
+    const filterTags = [...tags].filter(tag => tag != null && tag.name !== "")
     const checkedTags = [...filterTags].map(tag => ({
-        name: tag,
+        name: tag.name,
         checked: false
     }))
 
@@ -27,4 +39,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default Page;

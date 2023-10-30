@@ -2,7 +2,7 @@
 
 import TagSelectComponent from "@/components/TagSelectComponent";
 import { TagOnId } from "@/types";
-import { cache, use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const getTags = async () => {
     const response = await import("@/app/api/tagOnIds/route")
@@ -13,7 +13,7 @@ const getTags = async () => {
     return data
 }
 
-const page = () => {
+const Page = () => {
     const [tags, setTags] = useState<TagOnId[]>([])
 
     useEffect(() => {
@@ -34,4 +34,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default Page;

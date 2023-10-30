@@ -6,7 +6,7 @@ import { TagOnId } from "@/types";
 import { useRouter } from "next/navigation";
 import { FormEvent, useRef } from "react";
 
-const page = () => {
+const Page = () => {
     const tagNameRef = useRef<HTMLInputElement>(null)
     const router = useRouter()
 
@@ -62,4 +62,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default Page;

@@ -12,7 +12,7 @@ const getSongs = cache(async (tag: string) => {
     return data
 })
 
-const page = ({ params }: { params: { slug: string } }) => {
+const Page = ({ params }: { params: { slug: string } }) => {
     const [songs, setSongs] = useState<SongOnId[]>([])
 
     useEffect(() => {
@@ -29,4 +29,4 @@ const page = ({ params }: { params: { slug: string } }) => {
     );
 }
 
-export default page;
+export default Page;

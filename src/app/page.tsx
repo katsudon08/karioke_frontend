@@ -13,7 +13,7 @@ const getSongs = async () => {
     return data
 }
 
-const page = () => {
+const Page = () => {
     const [songs, setSongs] = useState<SongOnId[]>([])
 
     useEffect(() => {
@@ -30,4 +30,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default Page;
