@@ -1,3 +1,5 @@
+"use client"
+
 import TagSelectComponent from "@/components/TagSelectComponent";
 import { TagOnId } from "@/types";
 import { cache, use, useEffect, useState } from "react";
