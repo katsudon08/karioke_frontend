@@ -5,12 +5,6 @@ import { SongOnId } from "@/types";
 import { cache, use, useEffect, useState } from "react";
 
 const getSongs = async (tag: string) => {
-    // const response = await import("@/app/api/songs/route")
-
-    // const data = await (await response.GET(tag)).json()
-
-    // return data
-
     const response = await fetch("/api/songs", {
         method: "POST",
         cache: "no-store",
