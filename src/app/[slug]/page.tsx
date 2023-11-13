@@ -4,13 +4,13 @@ import DisplayComponent from "@/components/DisplayComponent";
 import { SongOnId } from "@/types";
 import { cache, use, useEffect, useState } from "react";
 
-const getSongs = cache(async (tag: string) => {
+const getSongs = async (tag: string) => {
     const response = await import("@/app/api/songs/route")
 
     const data = await (await response.GET(tag)).json()
 
     return data
-})
+}
 
 const Page = ({ params }: { params: { slug: string } }) => {
     const [songs, setSongs] = useState<SongOnId[]>([])

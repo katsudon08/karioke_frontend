@@ -5,10 +5,20 @@ import { SongOnId } from "@/types";
 import { useEffect, useState } from "react";
 
 const getSongs = async () => {
-    const response = await import("@/app/api/songs/route")
+    const response = await fetch("/api/songs", {
+        method: "POST",
+        cache: "no-store",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(null)
+    })
 
-    await response.GET(null)
-    const data = await (await response.GET(null)).json()
+    const data = await response.json()
+
+    if (!response.ok) {
+        throw new Error("データの取得に失敗しました.")
+    }
 
     return data
 }

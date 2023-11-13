@@ -1,6 +1,9 @@
 import { URL } from "@/types";
 
-export async function GET(tagName: string | null) {
+export async function POST(request: Request) {
+    const body = await request.json()
+    console.log("テスト", body)
+
     const songs = await fetch(URL, {
         cache: "no-store"
     })
@@ -39,28 +42,28 @@ export async function GET(tagName: string | null) {
 
     console.log(nonSpaceTags)
 
-    if (tagName !== null) {
-        const filterTags = ([...nonSpaceTags].filter(tag => tag.name === tagName))
-        if (filterTags.length === 0) {
-            return new Response(JSON.stringify([]))
-        }
-        const filterTag = filterTags[0]
-        console.log(filterTag)
+    // if (body !== "null") {
+    //     const filterTags = ([...nonSpaceTags].filter(tag => tag.name === body))
+    //     if (filterTags.length === 0) {
+    //         return new Response(JSON.stringify([]))
+    //     }
+    //     const filterTag = filterTags[0]
+    //     console.log(filterTag)
 
-        const tagmapData = await tagMaps.json()
-        console.log(tagmapData)
+    //     const tagmapData = await tagMaps.json()
+    //     console.log(tagmapData)
 
-        const filterTagMapData = [...tagmapData].filter(tag => tag.tagId === filterTag.id)
-        console.log(filterTagMapData)
+    //     const filterTagMapData = [...tagmapData].filter(tag => tag.tagId === filterTag.id)
+    //     console.log(filterTagMapData)
 
-        const tagmapIds = [...filterTagMapData].map(tag => tag.songId)
-        console.log(tagmapIds)
+    //     const tagmapIds = [...filterTagMapData].map(tag => tag.songId)
+    //     console.log(tagmapIds)
 
-        const filterSongs = [...songData].filter(song => tagmapIds.includes(song.id))
-        console.log(filterSongs)
+    //     const filterSongs = [...songData].filter(song => tagmapIds.includes(song.id))
+    //     console.log(filterSongs)
 
-        return new Response(JSON.stringify(filterSongs))
-    }
+    //     return new Response(JSON.stringify(filterSongs))
+    // }
 
     return new Response(JSON.stringify(songData))
 }
