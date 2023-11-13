@@ -2,7 +2,7 @@
 
 import DisplayComponent from "@/components/DisplayComponent";
 import { SongOnId } from "@/types";
-import { cache, use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const getSongs = async (tag: string) => {
     const response = await fetch("/api/songs", {
