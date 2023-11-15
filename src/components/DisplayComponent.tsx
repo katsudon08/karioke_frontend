@@ -20,7 +20,8 @@ const DisplayComponent = ({ songs, slug }: { songs: SongOnId[], slug: string }) 
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(slug)
+                // ひらがな、漢字等も考慮してdecodeしている
+                body: JSON.stringify(decodeURI(slug))
             })
 
             if (!response.ok) {
