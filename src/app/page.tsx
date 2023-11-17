@@ -29,6 +29,7 @@ const Page = () => {
     useEffect(() => {
         const fetchData = async () => {
             const fetchSongs = await getSongs()
+            console.log("fetchsongs", fetchSongs)
             setSongs(fetchSongs)
         }
 

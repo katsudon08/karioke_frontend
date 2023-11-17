@@ -29,6 +29,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
     useEffect(() => {
         const fetchData = async () => {
             const fetchSongs = await getSongs(decodeURI(params.slug))
+            console.log("fetchsongs", fetchSongs)
             setSongs(fetchSongs)
         }
 
