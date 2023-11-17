@@ -43,7 +43,7 @@ export async function POST(request: Request) {
 
     console.log(nonSpaceTags)
 
-    if (body !== "null") {
+    if (body !== "") {
         const filterTags = ([...nonSpaceTags].filter(tag => tag.name === body))
         if (filterTags.length === 0) {
             return new Response(JSON.stringify([]))

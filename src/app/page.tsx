@@ -11,7 +11,7 @@ const getSongs = async () => {
         headers: {
             "content-type": "application/json"
         },
-        body: JSON.stringify(null)
+        body: JSON.stringify("")
     })
 
     const data = await response.json()
