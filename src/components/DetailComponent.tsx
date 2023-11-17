@@ -78,14 +78,14 @@ const DetailComponent = () => {
                 </div>
             </div>
             <div>
-                <label htmlFor="key" className=" w-full flex justify-start ">キー</label>
+                <label htmlFor="key" className=" w-full flex justify-start ">キー: {song.key-12 > 0 ? `+${song.key-12}` : song.key-12}</label>
                 <input
                     aria-label="キーのプラスマイナス"
                     readOnly
                     value={song.key}
                     type="range"
                     min={0}
-                    max={25}
+                    max={24}
                     className=" w-full  py-2 rounded-lg  disabled:bg-blue-400 disabled:text-blue-400 disabled:border-blue-400 "
                     id="key"
                 />
