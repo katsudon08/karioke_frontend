@@ -6,23 +6,29 @@ import { TagMap, TagOnId } from "@/types";
 import { useEffect, useState } from "react";
 
 const getTags = async () => {
-    const response = await import("@/app/api/tagOnIds/route")
+    const response = await fetch("/api/tagOnIds", {
+        cache: "no-store"
+    })
 
-    const cache = await (await response.GET()).json()
-    const data = await (await response.GET()).json()
-    console.log("tagsキャッシュ", cache)
-    console.log("tagsデータ", data)
+    if (!response.ok) {
+        throw new Error("データの取得に失敗しました.")
+    }
+
+    const data = await response.json()
 
     return data
 }
 
 const getTagMaps = async () => {
-    const response = await import("@/app/api/tagmap/route")
+    const response = await fetch("/api/tagmap", {
+        cache: "no-store"
+    })
 
-    const cache = await (await response.GET()).json()
-    const data = await (await response.GET()).json()
-    console.log("tagmapsキャッシュ", cache)
-    console.log("tagmapsデータ", data)
+    if (!response.ok) {
+        throw new Error("データの取得に失敗しました.")
+    }
+
+    const data = await response.json()
 
     return data
 }
@@ -36,14 +42,14 @@ const Page = () => {
         const fetchData = async () => {
             const tagMapsData = await getTagMaps()
             const tagOnIdsData = await getTags()
-            console.log("フェッチのやつ", tagMapsData)
-            console.log("フェッチのやつ", tagOnIdsData)
+            console.log("フェッチ", tagMapsData)
+            console.log("フェッチ", tagOnIdsData)
             setTagmaps(tagMapsData)
             setTagOnIds(tagOnIdsData)
         }
 
         fetchData()
-    }, [])
+    }, [tagmaps, tagOnIds])
 
     console.log("フェッチ後", tagmaps)
     console.log("フェッチ後", tagOnIds)
