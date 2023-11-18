@@ -65,6 +65,7 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
         const song: Song = GetLocalStrageSong()
 
         setSong(song);
+        setKey(song.key-12)
         handleColorChange(song.rank)
     }
 
