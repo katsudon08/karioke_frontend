@@ -49,7 +49,7 @@ const Page = () => {
         }
 
         fetchData()
-    }, [tagmaps, tagOnIds])
+    }, [])
 
     console.log("フェッチ後", tagmaps)
     console.log("フェッチ後", tagOnIds)
