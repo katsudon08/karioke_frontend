@@ -1,20 +1,24 @@
 "use client"
 
 import TagComponent from "@/components/TagComponent";
-import { TagOnId } from "@/types";
 import { useEffect, useState } from "react";
 
 const getTags = async () => {
-    const response = await import("@/app/api/tags/route")
+    const response = await fetch("/api/tags", {
+        cache: "no-store"
+    })
 
-    await response.GET()
-    const data = await (await response.GET()).json()
+    if (!response.ok) {
+        throw new Error("データの取得に失敗しました.")
+    }
+
+    const data = await response.json()
 
     return data
 }
 
 const Page = () => {
-    const [tags, setTags] = useState<TagOnId[]>([])
+    const [tags, setTags] = useState<string[]>([])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,11 +28,14 @@ const Page = () => {
 
         fetchData()
     }, [tags])
-    const filterTags = [...tags].filter(tag => tag != null && tag.name !== "")
-    const checkedTags = [...filterTags].map(tag => ({
-        name: tag.name,
+    console.log("tags", tags)
+    console.log(typeof(tags))
+
+    const checkedTags = [...tags].map(tag => ({
+        name: tag,
         checked: false
     }))
+    console.log("テスト", checkedTags)
 
     return (
         <div className=" h-full flex flex-col justify-center items-center text-center break-all py-6 px-6 ">

@@ -17,38 +17,41 @@ const TagComponent = ({ isCreate, checkedTags, tagIds }: { isCreate: boolean, ch
     useEffect(() => {
         console.log("checkedTags", checkedTags)
         setTags(checkedTags)
-    }, [checkedTags, tags])
+    }, [checkedTags])
 
     const handleAddTag = async () => {
         console.log("tag add")
-        const addTag: Tag = {
-            name: ref.current?.value ?? "",
-            checked: false,
+
+        if (ref.current?.value !== "") {
+            const addTag: Tag = {
+                name: ref.current?.value ?? "",
+                checked: false,
+            }
+
+            // nameが同じタグをのぞくために、nameをキーとした連想配列作成後に値のみを取り出して配列へと変換したものをset
+            const newTags = [...tags, addTag]
+            const tagsMap = new Map(newTags.map((newTag) => [newTag.name, newTag]))
+            const tagsMapArray = Array.from(tagsMap.values())
+
+            setAnchorEl((tagsMapArray.length < newTags.length))
+
+            if (ref.current?.value !== "") setTags(tagsMapArray)
+            if (ref.current?.value) ref.current.value = ""
+
+            const response = await fetch("/api/tag", {
+                method: "POST",
+                cache: "no-store",
+                body: JSON.stringify({ name: addTag.name })
+            })
+
+            if (!response.ok) {
+                throw new Error("データの送信に失敗しました.")
+            }
+
+            const data = await response.json()
+
+            console.log(data)
         }
-
-        // nameが同じタグをのぞくために、nameをキーとした連想配列作成後に値のみを取り出して配列へと変換したものをset
-        const newTags = [...tags, addTag]
-        const tagsMap = new Map(newTags.map((newTag) => [newTag.name, newTag]))
-        const tagsMapArray = Array.from(tagsMap.values())
-
-        setAnchorEl((tagsMapArray.length < newTags.length))
-
-        if (ref.current?.value !== "") setTags(tagsMapArray)
-        if (ref.current?.value) ref.current.value = ""
-
-        const response = await fetch("/api/tag", {
-            method: "POST",
-            cache: "no-store",
-            body: JSON.stringify({ name: addTag.name })
-        })
-
-        if (!response.ok) {
-            throw new Error("データの送信に失敗しました.")
-        }
-
-        const data = await response.json()
-
-        console.log(data)
     }
 
     const handleToggleChange = (num: number) => {
