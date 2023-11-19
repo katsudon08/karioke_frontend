@@ -30,5 +30,5 @@ export interface TagMap {
     tagId: number
 }
 
-export const URL = "http://localhost:8000/song"
-// export const URL = "https://karioke-backend.onrender.com/song"
+// export const URL = "http://localhost:8000/song"
+export const URL = "https://karioke-backend.onrender.com/song"
