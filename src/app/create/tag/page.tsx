@@ -27,7 +27,7 @@ const Page = () => {
         }
 
         fetchData()
-    }, [tags])
+    }, [])
     console.log("tags", tags)
     console.log(typeof(tags))
 
