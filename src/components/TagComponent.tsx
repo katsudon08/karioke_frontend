@@ -2,7 +2,7 @@
 
 import { GetLocalStrageId } from "@/lib/getStrageId";
 import { GetLocalStrageSong } from "@/lib/getStrageSong";
-import { PostData, Song, SongOnId, Tag, TagOnId } from "@/types";
+import { PostData, Song, SongOnId, Tag } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
