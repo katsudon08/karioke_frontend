@@ -6,23 +6,29 @@ import { TagMap, TagOnId } from "@/types";
 import { useEffect, useState } from "react";
 
 const getTags = async () => {
-    const response = await import("@/app/api/tagOnIds/route")
+    const response = await fetch("/api/tagOnIds", {
+        cache: "no-store"
+    })
 
-    const cache = await (await response.GET()).json()
-    const data = await (await response.GET()).json()
-    console.log("tagsキャッシュ", cache)
-    console.log("tagsデータ", data)
+    if (!response.ok) {
+        throw new Error("データの取得に失敗しました.")
+    }
+
+    const data = await response.json()
 
     return data
 }
 
 const getTagMaps = async () => {
-    const response = await import("@/app/api/tagmap/route")
+    const response = await fetch("/api/tagmap", {
+        cache: "no-store"
+    })
 
-    const cache = await (await response.GET()).json()
-    const data = await (await response.GET()).json()
-    console.log("tagmapsキャッシュ", cache)
-    console.log("tagmapsデータ", data)
+    if (!response.ok) {
+        throw new Error("データの取得に失敗しました.")
+    }
+
+    const data = await response.json()
 
     return data
 }
@@ -36,8 +42,8 @@ const Page = () => {
         const fetchData = async () => {
             const tagMapsData = await getTagMaps()
             const tagOnIdsData = await getTags()
-            console.log("フェッチのやつ", tagMapsData)
-            console.log("フェッチのやつ", tagOnIdsData)
+            console.log("フェッチ", tagMapsData)
+            console.log("フェッチ", tagOnIdsData)
             setTagmaps(tagMapsData)
             setTagOnIds(tagOnIdsData)
         }
@@ -48,13 +54,11 @@ const Page = () => {
     console.log("フェッチ後", tagmaps)
     console.log("フェッチ後", tagOnIds)
 
-    // const tagmaps: TagMap[] = use(getTagMaps())
     const filterTagMaps = [...tagmaps].filter(tagmap => tagmap.songId === GetLocalStrageId())
     console.log(filterTagMaps)
     const filterTagIds = [...filterTagMaps].map(tag => tag.tagId)
     console.log("filterTagIds", filterTagIds)
 
-    // const tagOnIds: TagOnId[] = use(getTags())
     const filterTags = [...tagOnIds].filter(tag => tag.name != null && tag.name !== "")
     console.log("test", filterTags)
     const checkedTags = [...filterTags].map(tag => ({
@@ -70,7 +74,7 @@ const Page = () => {
     return (
         <div className=" h-full flex flex-col justify-center items-center text-center break-all py-6 px-6 ">
             <main aria-label="曲情報編集ページ" className=" bg-white h-fit w-full max-w-lg shadow-lg rounded-lg overflow-y-scroll hidden-scrollbar ">
-                <TagComponent isCreate={false} checkedTags={checkedTags} tagIds={tagIds}/>
+                <TagComponent isCreate={false} checkedTags={checkedTags} tagIdsProp={tagIds}/>
             </main>
         </div>
     );

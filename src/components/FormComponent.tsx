@@ -17,9 +17,10 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
         title: "",
         artist: "",
         rank: 0,
-        key: 13,
+        key: 12,
         memo: ""
     })
+    const [key, setKey] = useState<number>(0)
 
     const [colorFlags, setColorFlags] = useState<boolean[]>([...Array(5).fill(false)])
     const router = useRouter()
@@ -64,7 +65,13 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
         const song: Song = GetLocalStrageSong()
 
         setSong(song);
+        setKey(song.key-12)
         handleColorChange(song.rank)
+    }
+
+    const handleSetKey = () => {
+        // キーの中央値が12のため、-12
+        setKey(Number(keyRef.current?.value)-12)
     }
 
     useEffect(() => {
@@ -110,16 +117,17 @@ const FormComponent = ({ isCreate }: { isCreate: boolean }) => {
                 </div>
             </div>
             <div>
-                <label htmlFor="key" className=" w-full flex justify-start ">キー</label>
+                <label htmlFor="key" className=" w-full flex justify-start ">キー: {key > 0 ? `+${key}` : key}</label>
                 <input
                     ref={keyRef}
                     required
                     type="range"
                     defaultValue={song.key}
                     min={0}
-                    max={25}
+                    max={24}
                     className=" w-full  py-2 rounded-lg focus:outline-none focus:border-blue-400 "
                     id="key"
+                    onChange={handleSetKey}
                 />
             </div>
             <div>

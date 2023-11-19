@@ -2,53 +2,60 @@
 
 import { GetLocalStrageId } from "@/lib/getStrageId";
 import { GetLocalStrageSong } from "@/lib/getStrageSong";
-import { PostData, Song, SongOnId, Tag, TagOnId } from "@/types";
+import { PostData, Song, SongOnId, Tag } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { FormEvent, useState, useRef, ChangeEvent } from "react";
 
-const TagComponent = ({ isCreate, checkedTags, tagIds }: { isCreate: boolean, checkedTags: Tag[], tagIds: number[] }) => {
+const TagComponent = ({ isCreate, checkedTags, tagIdsProp }: { isCreate: boolean, checkedTags: Tag[], tagIdsProp: number[] }) => {
     const router = useRouter()
     const ref = useRef<HTMLInputElement>(null)
     const [anchorEl, setAnchorEl] = useState<boolean>(false)
     const [tags, setTags] = useState<Tag[]>([])
+    const [tagIds, setTagIds] = useState<number[]>([])
 
     useEffect(() => {
         console.log("checkedTags", checkedTags)
         setTags(checkedTags)
-    }, [checkedTags, tags])
+        setTagIds(tagIdsProp)
+    }, [checkedTags, tagIdsProp])
 
     const handleAddTag = async () => {
         console.log("tag add")
-        const addTag: Tag = {
-            name: ref.current?.value ?? "",
-            checked: false,
+
+        if (ref.current?.value !== "") {
+            const addTag: Tag = {
+                name: ref.current?.value ?? "",
+                checked: false,
+            }
+
+            // nameが同じタグをのぞくために、nameをキーとした連想配列作成後に値のみを取り出して配列へと変換したものをset
+            const newTags = [...tags, addTag]
+            const tagsMap = new Map(newTags.map((newTag) => [newTag.name, newTag]))
+            const tagsMapArray = Array.from(tagsMap.values())
+
+            setAnchorEl((tagsMapArray.length < newTags.length))
+
+            if (ref.current?.value !== "") setTags(tagsMapArray)
+            if (ref.current?.value) ref.current.value = ""
+
+            const response = await fetch("/api/tag", {
+                method: "POST",
+                cache: "no-store",
+                body: JSON.stringify({ name: addTag.name })
+            })
+
+            if (!response.ok) {
+                throw new Error("データの送信に失敗しました.")
+            }
+
+            const data = await response.json()
+
+            console.log(data)
+            console.log(data.id)
+            setTagIds([...tagIds, data.id])
         }
-
-        // nameが同じタグをのぞくために、nameをキーとした連想配列作成後に値のみを取り出して配列へと変換したものをset
-        const newTags = [...tags, addTag]
-        const tagsMap = new Map(newTags.map((newTag) => [newTag.name, newTag]))
-        const tagsMapArray = Array.from(tagsMap.values())
-
-        setAnchorEl((tagsMapArray.length < newTags.length))
-
-        if (ref.current?.value !== "") setTags(tagsMapArray)
-        if (ref.current?.value) ref.current.value = ""
-
-        const response = await fetch("/api/tag", {
-            method: "POST",
-            cache: "no-store",
-            body: JSON.stringify({ name: addTag.name })
-        })
-
-        if (!response.ok) {
-            throw new Error("データの送信に失敗しました.")
-        }
-
-        const data = await response.json()
-
-        console.log(data)
     }
 
     const handleToggleChange = (num: number) => {
