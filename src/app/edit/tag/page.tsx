@@ -54,13 +54,11 @@ const Page = () => {
     console.log("フェッチ後", tagmaps)
     console.log("フェッチ後", tagOnIds)
 
-    // const tagmaps: TagMap[] = use(getTagMaps())
     const filterTagMaps = [...tagmaps].filter(tagmap => tagmap.songId === GetLocalStrageId())
     console.log(filterTagMaps)
     const filterTagIds = [...filterTagMaps].map(tag => tag.tagId)
     console.log("filterTagIds", filterTagIds)
 
-    // const tagOnIds: TagOnId[] = use(getTags())
     const filterTags = [...tagOnIds].filter(tag => tag.name != null && tag.name !== "")
     console.log("test", filterTags)
     const checkedTags = [...filterTags].map(tag => ({
@@ -76,7 +74,7 @@ const Page = () => {
     return (
         <div className=" h-full flex flex-col justify-center items-center text-center break-all py-6 px-6 ">
             <main aria-label="曲情報編集ページ" className=" bg-white h-fit w-full max-w-lg shadow-lg rounded-lg overflow-y-scroll hidden-scrollbar ">
-                <TagComponent isCreate={false} checkedTags={checkedTags} tagIds={tagIds}/>
+                <TagComponent isCreate={false} checkedTags={checkedTags} tagIdsProp={tagIds}/>
             </main>
         </div>
     );

@@ -8,16 +8,18 @@ import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { FormEvent, useState, useRef, ChangeEvent } from "react";
 
-const TagComponent = ({ isCreate, checkedTags, tagIds }: { isCreate: boolean, checkedTags: Tag[], tagIds: number[] }) => {
+const TagComponent = ({ isCreate, checkedTags, tagIdsProp }: { isCreate: boolean, checkedTags: Tag[], tagIdsProp: number[] }) => {
     const router = useRouter()
     const ref = useRef<HTMLInputElement>(null)
     const [anchorEl, setAnchorEl] = useState<boolean>(false)
     const [tags, setTags] = useState<Tag[]>([])
+    const [tagIds, setTagIds] = useState<number[]>([])
 
     useEffect(() => {
         console.log("checkedTags", checkedTags)
         setTags(checkedTags)
-    }, [checkedTags])
+        setTagIds(tagIdsProp)
+    }, [checkedTags, tagIdsProp])
 
     const handleAddTag = async () => {
         console.log("tag add")
@@ -51,6 +53,8 @@ const TagComponent = ({ isCreate, checkedTags, tagIds }: { isCreate: boolean, ch
             const data = await response.json()
 
             console.log(data)
+            console.log(data.id)
+            setTagIds([...tagIds, data.id])
         }
     }
 
